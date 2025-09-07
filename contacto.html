@@ -1,70 +1,61 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contactos</title>
+    <title>Clinica IDW - Contactos</title>
     <link rel="stylesheet" href="css/estilos.css">
-  </head>
+</head>
+
 <body>
-<header>
-  <h1>Clínica IWD</h1>
-         <nav>
+    <header>
+        <h1>Clinica IDW</h1>
+        <nav>
             <ul>
-        <li><a href="index.html">Inicio</a></li>
-         <li><a href="institucional.html">Institucional</a></li>
-           
-        </ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="institucional.html">Institucional</a></li>
+                <li><a href="contacto.html">Contacto</a></li>
+            </ul>
         </nav>
-      </header>
-         <main>
+    </header>
 
-          <h2>Horario de atención</h2>
+    <main class="contacto">
+      <section class="info">
+        <h2>Horario de atención</h2>
+        <p>Lunes a viernes de 8:30hs a 20:30hs</p> 
+        <p>Sábados y domingos de 8:30hs a 13:30hs</p>
+        <div>
+          <h3>Se pueden comunicar con los siguientes medios:</h3>
+          <p>Dirección: Sarmiento al 234</p>
+          <p>Teléfono: (0343) 456-7890</p>
+          <p>Email: contacto.idwsa@gmail.com </p>
+          <h3>Nuestra ubicación es:</h3>
+          <p>Provincia: Entre Ríos</p>
+          <p>Localidad: Concordia</p>
+        </div>
+      </section>  
 
-    <p>Lunes a viernes de 8:30hs a 20:30hs</p> 
-    <p>Sábados y domingos de 8:30hs a 13:30hs</p>
-     
-    <form>
+        <form>
+          <h2>Complete el formulario para solicitar su turno</h2>    
+          <label for="nombre">Nombre:</label>
+          <input type="text" id="nombre" name="nombre">
 
-    <h3>Complete el formulario para solicitar su turno:</h3>
-      
-    <label for="nombre">Nombre:</label>
-     <input type="text" id="nombre" name="nombre">
+          <label for="apellido">Apellido:</label>
+          <input type="text" id="apellido" name="apellido">
 
-      <label for="apellido">Apellido:</label>
-      <input type="text" id="apellido" name="apellido">
-
-      <label for="email">Email:</label>
-      <input type="email" id="email" name="email">
-      
-      <label for="mensaje">Mensaje:</label><br>    
-      <textarea name="mensaje" rows="10"></textarea>
-   
-      <button type="submit">Enviar</button> 
-        
-
-       </form> 
-        
-        <section>
- 
-
-            <h3>Se pueden comunicar con los siguientes medios:</h3>
-           
-            <p>Dirección: Sarmiento al 234</p>
-            <p>Teléfono: (0343) 456-7890</p>
-            <p>Email: contacto.idwsa@gmail.com </p>
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email">
             
-            <h3>Nuestra ubicación es:</h3>
-            <p>Provincia: Entre Ríos</p>
-            <p>Localidad: Concordia</p>
-           
-          </section>
+          <label for="mensaje">Mensaje:</label> 
+          <textarea name="mensaje" rows="10"></textarea>
         
-        </main>
-      
-        <footer>
-           <p>&copy; 2025 IDW S.A - Confianza y Compromiso</p>
-        </footer>
+          <button type="submit">Enviar</button>
+        </form> 
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Clínica IDW. Todos los derechos reservados.</p>
+    </footer>
 </body>
 </html>
 
