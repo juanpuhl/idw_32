@@ -75,6 +75,15 @@ main {
     font-weight: 400;
 }
 
+/*estilo del formulario*/
+form label, 
+form input, 
+form textarea, 
+form button {
+  display: block;       /* aca chicos pone uno debajo de cada linea */
+  margin-bottom: 12px;  /* deja el espacio */
+}
+
 footer {
     background: #222;
     color: white;
@@ -82,3 +91,6 @@ footer {
     padding: 1rem;
     margin-top: 2rem;
 }
+
+
+
