@@ -4,23 +4,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clinica IDW - Información institucional</title>
+    <title>Clínica IDW - Información Institucional</title>
     <link rel="stylesheet" href="css/estilos.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
-<body>
-    <header>
-        <h1>Clinica IDW</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="contacto.html">contacto</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <h2>¿Quiénes Somos?</h2>
-        <p>
+<body class="bg-light">
+
+    <!-- Navbar responsive -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">Clínica IDW</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="institucional.html">Institucional</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido principal -->
+    <main class="container py-5">
+        <h2 class="mb-4 text-center">¿Quiénes Somos?</h2>
+        <p class="mb-4">
             Somos una clínica que nació con un propósito muy claro: cuidar de la salud de las personas con respeto,
             compromiso y calidez. Creemos que cada paciente es único, por eso nuestra atención va más allá de lo médico;
             buscamos escuchar, acompañar y estar presentes en cada momento del proceso.
@@ -35,38 +47,44 @@
             acompañar a cada persona en el camino hacia su bienestar, ofreciendo atención de calidad, pero sobre todo un
             vínculo humano que marque la diferencia.
         </p>
-        <h3>Misión</h3>
-        <p>
-            Nuestra misión es acercar la salud a todas las personas mediante servicios médicos
-            confiables, accesibles y de calidad, siempre priorizando el bienestar integral de
-            cada paciente.
-        </p>
-        <h3>Visión</h3>
-        <p>
-            Queremos consolidarnos como la clínica de referencia en la región, destacándonos
-            por la innovación en nuestros servicios, el profesionalismo de nuestro equipo y la
-            confianza que generamos en la comunidad.
-        </p>
-        <h3>Valores</h3>
-        <ul>
-            <li><strong>Compromiso:</strong>asumimos cada día la responsabilidad de cuidar la salud y el bienestar de
-                nuestros pacientes.</li>
-            <li><strong>Calidad:</strong>buscamos la excelencia en cada servicio, apoyándonos en la experiencia
-                profesional y la tecnología médica.</li>
-            <li><strong>Respeto:</strong>valoramos a cada persona, brindando un trato humano, cercano y digno en todo
-                momento.</li>
-            <li><strong>Confianza:</strong>construimos vínculos sólidos con nuestros pacientes basados en la
-                transparencia y la calidez.</li>
-            <li><strong>Vocación:</strong>trabajamos con pasión y dedicación para acompañar a quienes confían en
-                nosotros.</li>
-        </ul>
+
+        <div class="row mb-4">
+            <div class="col-md-4">
+                <h3>Misión</h3>
+                <p>Nuestra misión es acercar la salud a todas las personas mediante servicios médicos confiables,
+                    accesibles y de calidad, priorizando el bienestar integral de cada paciente.</p>
+            </div>
+            <div class="col-md-4">
+                <h3>Visión</h3>
+                <p>Queremos consolidarnos como la clínica de referencia en la región, destacándonos por la innovación en
+                    nuestros servicios, el profesionalismo de nuestro equipo y la confianza que generamos en la
+                    comunidad.</p>
+            </div>
+            <div class="col-md-4">
+                <h3>Valores</h3>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><strong>Compromiso:</strong> asumimos la responsabilidad de cuidar la
+                        salud y el bienestar de nuestros pacientes.</li>
+                    <li class="list-group-item"><strong>Calidad:</strong> buscamos la excelencia en cada servicio
+                        apoyándonos en la experiencia profesional y la tecnología médica.</li>
+                    <li class="list-group-item"><strong>Respeto:</strong> valoramos a cada persona, brindando un trato
+                        humano, cercano y digno.</li>
+                    <li class="list-group-item"><strong>Confianza:</strong> construimos vínculos sólidos basados en la
+                        transparencia y la calidez.</li>
+                    <li class="list-group-item"><strong>Vocación:</strong> trabajamos con pasión y dedicación para
+                        acompañar a quienes confían en nosotros.</li>
+                </ul>
+            </div>
+        </div>
     </main>
-    <footer>
-        <footer>
-            &copy; 2025 IDW S.A - Confianza y Compromiso
-        </footer>
-</body>
-</footer>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3">
+        &copy; 2025 Clínica IDW. Todos los derechos reservados.
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
