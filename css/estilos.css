@@ -57,6 +57,17 @@ main {
     box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 
 }
+
+/* chicos agrege esto: para las imagenes de los medicos  */
+.medicos img {
+  width: 100%;        /* ocupa todo el ancho del recuadro */
+  height: 180px;      /* altura fija*/
+  object-fit: cover;  /* recorta y centra */
+  border-radius: 6px; /* esquinas redondeadas */
+  margin-bottom: 12px;
+}
+
+
 .obrasocial{
     display: flex;
     flex-wrap: wrap;
@@ -75,10 +86,22 @@ main {
     font-weight: 400;
 }
 
+/* para que  footer que siempre bien abajo */
+html, body { height: 100%; }
+body { 
+  display: flex; 
+  flex-direction: column; 
+}
+main { flex: 1; }
+
 footer {
     background: #222;
     color: white;
     text-align: center;
     padding: 1rem;
     margin-top: 2rem;
+}
+
+footer p {
+    margin: 0; /* Elimina el margen por defecto del párrafo */
 }
