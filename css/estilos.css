@@ -152,3 +152,46 @@ footer {
 footer p {
     margin: 0; /* Elimina el margen por defecto del párrafo */
 }
+contacto {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    padding: 20px;
+    max-width: 800px;
+    width: 100%;
+    box-sizing: border-box;
+}
+form {
+    max-width: 600px;
+    padding: 16px;
+    width: 100%;
+}
+/* para Tablets */
+@media (max-width: 900px) {
+    .contacto {
+        flex-direction: column;
+        gap: 22px;
+        padding: 10px;
+        max-width: 100%;
+        width: 100%;
+    }
+    form {
+        max-width: 100%;
+        padding: 8px;
+    }
+}
+/*  para Celulares */
+@media (max-width: 500px) {
+    .contacto {
+        gap: 22px;
+        padding: 10px;
+    }
+    form {
+        padding: 8px;
+    }
+}
+
+
+
+
+
