@@ -27,45 +27,68 @@
     </nav>
 
 
-    <main>
-        <section>
+    <main class="container py-4">
+        <section class="mb-4">
             <h2>Bienvenidos a la Clínica IWD</h2>
             <p>En nuestra Clínica ofrecemos un servicio médico de calidad,
             con profesionales especializados y atención personalizada.
             </p>
         </section>
 
-        <section class="catalogo">
-            <h2>Nuestros Profesionales</h2>
-            <div class="medicos">
-                    <div>
-                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Foto Dr. Juan Pérez">
-                        <h3>Dr. Juan Pérez</h3>
-                        <p>Especialista en Cardiología</p>
-                        <a href="#" class="btn btn-primary">Ver más</a>
+        <!-- Sección de cat. medicos -->
+     <section class="catalogo">
+            <h2 class="mb-3">Nuestros Profesionales</h2>
+
+           
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4">
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" class="card-img-top" alt="Foto Dr. Juan Pérez">
+                        <div class="card-body">
+                            <h3 class="h5 card-title">Dr. Juan Pérez</h3>
+                            <p class="card-text mb-3">Especialista en Cardiología</p>
+                            <a href="#" class="btn btn-primary">Ver más</a>
+                        </div>
                     </div>
-                <div>
-                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Foto Dra. María Gómez">
-                    <h3>Dra. María Gómez</h3>
-                    <p>Especialista en Pediatría</p>
-                    <a href="#" class="btn btn-primary">Ver más</a>
                 </div>
-                <div>
-                    <img src="https://randomuser.me/api/portraits/men/54.jpg" alt="Foto Dr. Carlos López">
-                    <h3>Dr. Carlos López</h3>
-                    <p>Especialista en Dermatología</p>
-                    <a href="#" class="btn btn-primary">Ver más</a>
+
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" class="card-img-top" alt="Foto Dra. María Gómez">
+                        <div class="card-body">
+                            <h3 class="h5 card-title">Dra. María Gómez</h3>
+                            <p class="card-text mb-3">Especialista en Pediatría</p>
+                            <a href="#" class="btn btn-primary">Ver más</a>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <img src="https://randomuser.me/api/portraits/women/55.jpg" alt="Foto Dra. Ana Martínez">
-                    <h3>Dra. Ana Martínez</h3>
-                    <p>Especialista en Ginecología</p>
-                    <a href="#" class="btn btn-primary">Ver más</a>
+
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="https://randomuser.me/api/portraits/men/54.jpg" class="card-img-top" alt="Foto Dr. Carlos López">
+                        <div class="card-body">
+                            <h3 class="h5 card-title">Dr. Carlos López</h3>
+                            <p class="card-text mb-3">Especialista en Dermatología</p>
+                            <a href="#" class="btn btn-primary">Ver más</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="https://randomuser.me/api/portraits/women/55.jpg" class="card-img-top" alt="Foto Dra. Ana Martínez">
+                        <div class="card-body">
+                            <h3 class="h5 card-title">Dra. Ana Martínez</h3>
+                            <p class="card-text mb-3">Especialista en Ginecología</p>
+                            <a href="#" class="btn btn-primary">Ver más</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
+
         <!-- Sección de Obras Sociales -->
-        <section class="mb-5">
+        <section class="mb-5 mt-4">
             <h2 class="mb-2">Trabajamos con las siguientes Obras Sociales</h2>
             <div class="d-flex flex-wrap gap-2 mb-4">
                 <button class="btn btn-outline-primary btn-lg" type="button">Sempre</button>
