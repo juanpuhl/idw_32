@@ -1,7 +1,7 @@
 # idw_32
 Trabajo Practico Intro Web - TUDW
 
-Este repositorio contiene el trabajo práctico grupal de la materia **Introducción a la Web**.  
+Este repositorio contiene el trabajo práctico grupal de la materia **Introducción al Desarollo Web**.  
 Aquí vamos a desarrollar los distintos ejercicios y prácticas que corresponden al curso.
 
 ---

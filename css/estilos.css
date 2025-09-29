@@ -1,0 +1,66 @@
+/* estilos.css juan para index */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+main:not(.container) { /* Excluye main con clase container (Bootstrap) */
+    max-width: 700px;
+    margin: 40px auto 0 auto;
+    padding: 0 15px;
+}
+
+/* estilo main inicio*/
+.catalogo {
+    background: none;
+    padding: 0;
+    margin-bottom: 0;
+    box-shadow: none;
+    border-radius:  0px;
+}
+.medicos{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 25px;
+    max-width: 1000px;
+    padding: 20px 0;
+}
+.medicos > div{
+    background: #f8f9fa;
+    border: 1px solid #88cbeb;
+    border-radius: 8px;
+    padding: 18px 22px;
+    box-sizing: border-box;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+
+}
+
+/* chicos agrege esto: para las imagenes de los medicos  */
+.medicos img {
+  width: 100%;        /* ocupa todo el ancho del recuadro */
+  height: 180px;      /* altura fija*/
+  object-fit: cover;  /* recorta y centra */
+  border-radius: 6px; /* esquinas redondeadas */
+  margin-bottom: 12px;
+}
+
+
+/* para que  footer que siempre bien abajo */
+html, body { height: 100%; }
+body { display: flex; flex-direction: column;}
+main { flex: 1; }
+
+ /* FOOTER*/
+footer {
+    background: #222;
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    margin-top: 2rem;
+}
+
+footer p {
+    margin: 0; /* Elimina el margen por defecto del párrafo */
+}
