@@ -46,6 +46,30 @@ main:not(.container) { /* Excluye main con clase container (Bootstrap) */
   margin-bottom: 12px;
 }
 
+/*boton de modo oscuro*/
+.navbar-nav .nav-item button#modoOscuroBtn {
+    text-decoration: none; 
+}
+
+/*tarjetas modo oscuro*/
+body.bg-dark .catalogo .card {
+    background: #393939;    
+    color: #f0f0f0;
+}
+
+body.bg-dark .obras-sociales .btn {
+  border-color: var(--bs-info);
+  color: var(--bs-info);
+}
+
+/*formulario modo oscuro*/
+body.bg-dark .formulario h2 {
+  color: #fff; 
+}
+
+.formulario h2 {
+  color: #000; 
+}
 
 /* para que  footer que siempre bien abajo */
 html, body { height: 100%; }
