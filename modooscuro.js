@@ -3,7 +3,6 @@ const boton = document.getElementById('modoOscuroBtn');
 const icono = document.getElementById('iconoModo');
 const navbar = document.getElementById('navbar');
 const formulario = document.querySelector('.formulario');
-const itemsvalores = document.querySelector('.list-group');
 const body = document.body;
 let modoOscuro = false;
 
@@ -20,10 +19,6 @@ boton.addEventListener('click', () => {
             navbar.classList.remove('navbar-dark', 'bg-primary');
             formulario.classList.remove('bg-light', 'text-dark');
             formulario.classList.add('bg-secondary', 'text-light');
-            itemsvalores.forEach(item => {
-                item.classList.remove('bg-light', 'text-dark');
-                item.classList.add('bg-dark', 'text-light');
-            });
         } else {
             // mostrar sol
             icono.classList.remove('bi-moon-fill');
@@ -34,12 +29,7 @@ boton.addEventListener('click', () => {
             navbar.classList.add('navbar-dark', 'bg-primary');
             navbar.classList.remove('navbar-dark', 'bg-dark');
             formulario.classList.remove('bg-secondary', 'text-light');
-            formulario.classList.add('bg-light', 'text-dark');
-            itemsvalores.forEach(item => {
-                item.classList.remove('bg-dark', 'text-light');
-                item.classList.add('bg-light', 'text-dark');
-            });
-                
+            formulario.classList.add('bg-light', 'text-dark');     
         }
     });
 });

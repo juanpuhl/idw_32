@@ -71,6 +71,15 @@ body.bg-dark .formulario h2 {
   color: #000; 
 }
 
+body.bg-dark .formulario{
+    background: #343a40;
+}
+
+body.bg-dark .list-group-item {
+    background-color: #212529; 
+    color: #f8f9fa;          
+}
+
 /* para que  footer que siempre bien abajo */
 html, body { height: 100%; }
 body { display: flex; flex-direction: column;}
