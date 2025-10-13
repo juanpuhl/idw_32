@@ -3,64 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clínica IWD - Inicio</title>
+    <title>Clínica IDW - Inicio</title>
     <link rel="stylesheet" href="css/estilos.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
 
-<body>
-    <header>
-        <h1>Clínica IWD</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Inicio</a></li>
-                <li><a href="institucional.html">Institucional</a></li>
-                <li><a href="contacto.html">Contacto</a></li>
-            </ul>
-        </nav>
-    </header>
+<body class="bg-light text-dark">
+    <nav id="navbar navbar-dark"  class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand fs-2 fw-bold" href="index.html">Clínica IDW</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link fw-bold active" href="index.html">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link fw-bold" href="institucional.html">Institucional</a></li>
+                    <li class="nav-item"><a class="nav-link fw-bold" href="contacto.html">Contacto</a></li>
+                    <li class="nav-item"><a class="nav-link fw-bold" href="#">Administración</a></li>
+                    <li class="nav-item"><a class="nav-link fw-bold" href="#">Login</a></li>
 
-    <main>
-        <section>
-        <h2>Bienvenidos a la Clínica IWD</h2>
-        <p>En nuestra Clínica ofrecemos un servicio médico de calidad,
-        con profesionales especializados y atención personalizada.
-        </p>
-        </section>
-
-        <section>
-        <h2>Nuestros Profesionales</h2>
-        <div>
-            <div>
-                <h3>Dr. Juan Pérez</h3>
-                <p>Especialista en Cardiología</p>
-            </div>
-            <div>
-                <h3>Dra. María Gómez</h3>
-                <p>Especialista en Pediatría</p>
-            </div>
-            <div>
-                <h3>Dr. Carlos López</h3>
-                <p>Especialista en Dermatología</p>
-            </div>
-            <div>
-                <h3>Dra. Ana Martínez</h3>
-                <p>Especialista en Ginecología</p>
+                    <li class="nav-item d-flex align-items-center ms-3">
+                        <button id="modoOscuroBtn" class="btn btn-link text-white p-0 d-flex align-items-center">
+                            <i id="iconoModo" class="bi bi-sun-fill fs-4"></i>
+                            <span class="d-inline d-lg-none ms-2 text-white fw-bold" id="textoModo">Modo oscuro</span>
+                        </button>
+                    </li>
+                </ul>
             </div>
         </div>
+    </nav>
+
+
+    <main class="container py-4">
+        <section class="mb-4">
+            <h2>Bienvenidos a la Clínica IWD</h2>
+            <p>En nuestra Clínica ofrecemos un servicio médico de calidad,
+            con profesionales especializados y atención personalizada.
+            </p>
         </section>
-        <section>
-            <h2>Trabajamos con las siguientes Obras Sociales</h2>
-            <ul>
-                <li>Sempre</li>
-                <li>Swiss Medical</li>
-                <li>Jerarquicos Salud</li>
-                <li>OSDE</li>
-            </ul>
+
+        <!-- Sección de cat. medicos -->
+     <section class="catalogo">
+            <h2 class="mb-3">Nuestros Profesionales</h2>
+          
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4">
+                <div class="col">
+                    <div class="card h-100 ">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" class="card-img-top" alt="Foto Dr. Juan Pérez">
+                        <div class="card-body">
+                            <h3 class="h5 card-title">Dr. Juan Pérez</h3>
+                            <p class="card-text mb-3">Especialista en Cardiología</p>
+                            <a href="#" class="btn btn-primary">Ver más</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" class="card-img-top" alt="Foto Dra. María Gómez">
+                        <div class="card-body">
+                            <h3 class="h5 card-title">Dra. María Gómez</h3>
+                            <p class="card-text mb-3">Especialista en Pediatría</p>
+                            <a href="#" class="btn btn-primary">Ver más</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="https://randomuser.me/api/portraits/men/54.jpg" class="card-img-top" alt="Foto Dr. Carlos López">
+                        <div class="card-body">
+                            <h3 class="h5 card-title">Dr. Carlos López</h3>
+                            <p class="card-text mb-3">Especialista en Dermatología</p>
+                            <a href="#" class="btn btn-primary">Ver más</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="card h-100">
+                        <img src="https://randomuser.me/api/portraits/women/55.jpg" class="card-img-top" alt="Foto Dra. Ana Martínez">
+                        <div class="card-body">
+                            <h3 class="h5 card-title">Dra. Ana Martínez</h3>
+                            <p class="card-text mb-3">Especialista en Ginecología</p>
+                            <a href="#" class="btn btn-primary">Ver más</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de Obras Sociales -->
+        <section class="obras-sociales mb-5 mt-4">
+            <h2 class="mb-2">Trabajamos con las siguientes Obras Sociales</h2>
+            <div class="d-flex flex-wrap gap-2 mb-4">
+                <button class="btn btn-outline-primary btn-lg" type="button">Sempre</button>
+                <button class="btn btn-outline-primary btn-lg" type="button">Swiss Medical</button>
+                <button class="btn btn-outline-primary btn-lg" type="button">Jerarquicos Salud</button>
+                <button class="btn btn-outline-primary btn-lg" type="button">OSDE</button>
+            </div>
         </section>
     </main>
 
-    <footer>
-        <p>&copy; 2024 Clínica IWD. Todos los derechos reservados.</p>
+    <footer class="bg-dark text-white text-center py-3 fw-bold">
+        <p>&copy; 2025 Clínica IDW. Todos los derechos reservados.</p>
     </footer>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script src="modooscuro.js"></script>
 </body>
 </html>
