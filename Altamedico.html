@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alta de Médicos - Clínica IDW</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilos.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+</head>
+
+<body class="bg-light text-dark">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container">
+      <a class="navbar-brand fs-2 fw-bold" href="index.html">Clínica IDW</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link fw-bold active" href="index.html">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link fw-bold" href="institucional.html">Institucional</a></li>
+          <li class="nav-item"><a class="nav-link fw-bold" href="contacto.html">Contacto</a></li>
+          <li class="nav-item d-flex align-items-center ms-3">
+            <button id="modoOscuroBtn" class="btn btn-link text-white p-0 d-flex align-items-center">
+              <i id="iconoModo" class="bi bi-sun-fill fs-4"></i>
+              <span class="d-inline d-lg-none ms-2 text-white fw-bold" id="textoModo">Modo oscuro</span>
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <main class="container my-5">
+    <section class="mb-5">
+      <form id="altaMedicoForm" class="border rounded p-4 bg-light shadow-sm" style="max-width: 650px; margin:auto;">
+        <h2 class="mb-3 text-center">Clínica IDW | Alta de Médicos</h2>
+
+        <div class="mb-3">
+          <label for="nombreApellido" class="form-label"> <i class="bi bi-person-fill"></i>Nombre y Apellido</label>
+          <input type="text" class="form-control" id="nombreApellido" placeholder="Campo obligatorio" required>
+        </div>
+
+       <div class="mb-3">
+          <label for="fechaAlta" class="form-label"><i class="bi bi-calendar2-date"></i>Fecha de Alta</label>
+          <!<div class="input-group">
+            <input type="date" class="form-control" id="fechaAlta" required>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="especialidad" class="form-label"><i class="bi bi-hospital"></i>Especialidad</label>
+          <select class="form-control" id="especialidad" required>
+            <option value="" disabled selected>Seleccionar una Especialidad</option>
+            <option value="Cardiología">Cardiología</option>
+            <option value="Pediatría">Pediatría</option>
+            <option value="Dermatología">Dermatología</option>
+            <option value="Ginecología">Ginecología</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="matricula" class="form-label"> <i class="bi bi-person-vcard-fill"></i>Matrícula</label>
+          <input type="text" class="form-control" id="matricula" placeholder="Campo obligatorio" required>
+       </div>
+        <div class="mb-3">
+          <label for="obraSocial" class="form-label"> <i class="bi bi-person-heart"></i>Obra Social</label>
+          <select class="form-control" id="obraSocial" required>
+            <option value="" disabled selected>Seleccionar una Obra Social</option>
+            <option value="Sempre">Sempre</option>
+            <option value="Swiss Medical">Swiss Medical</option>
+            <option value="Jerárquicos Salud">Jerárquicos Salud</option>
+            <option value="OSDE"> OSDE</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="telefono" class="form-label"><i class="bi bi-telephone-fill"></i></i>Teléfono </label>
+          <input type="text" class="form-control" id="telefono" placeholder="Por ejemplo: (0359) 278-1794" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-sm px-4">Registrar Médico</button>
+      </form>
+    </section>
+
+    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header bg-primary text-white">
+            <h5 class="modal-title" id="modalLabel">Registro exitoso</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+          </div>
+          <div class="modal-body text-center">
+            <p> Médico registrado correctamente.</p>
+            <input type="text" id="myInput" class="form-control mt-3" placeholder="Escribí algo aquí...">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="liveToastBtn">Enviar</button>
+      
+      <button type="button" class="btn btn-primary position-relative">
+     Mensajes
+    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+     25+
+     <span class="visually-hidden">Mensajes</span>
+     </span>
+        </button>
+      </div>
+        </div>
+      </div>
+    </div>
+   <div class="toast-container position-fixed bottom-0 end-0 p-3">
+      <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+          <img src="" class="toast-img rounded me-2" width="40" height="40" alt="Doctor">
+          <strong class="me-auto">Clinica IDW</strong>
+           <small> 11 minu </small>
+          <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+       El/la médico/a ha sido registrado/a con éxito.
+        </div>
+      </div>
+    </div>
+
+</main>
+  <footer class="bg-dark text-white text-center py-3 fw-bold">
+    <p>&copy; 2025 Clínica IDW. Todos los derechos reservados.</p>
+  </footer> 
+
+  <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="modooscuro.js"></script>
+ <script src="js/Altamedico.js"></script>
+  
+</body>
+</html       
+        
