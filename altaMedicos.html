@@ -12,7 +12,9 @@
 <body class="bg-light text-dark">
     <nav id="navbar navbar-dark"  class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
-            <a class="navbar-brand fs-2 fw-bold" href="index.html">Clínica IDW</a>
+            <a class="navbar-brand fs-2 fw-bold" href="index.html">
+            <img src="img/Logo-Cruz2.png" alt="Logo Clínica IDW" width="48" height="48" class="me-2">
+            <span class="d-none d-sm-inline">Clínica IDW</span></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -39,32 +41,76 @@
     <main class="container">
         <section class="mb-5">
             <h2 class="my-3">Alta de Médicos</h2>
-            <form id="altaMedicoForm" class="border  rounded p-4 bg-light shadow-sm">
+            <form id="altaMedicoForm" class="border  rounded p-4 bg-light shadow-sm formulario text-dark">
                 
                 <div class="mb-3">
                     <label for="nombre" class="form-label">Nombre</label>
-                    <input type="text" class="form-control" id="nombre" required>
+                    <input type="text" class="form-control" id="nombre" >
                 </div>
                 <div class="mb-3">
                     <label for="especialidad" class="form-label">Especialidad</label>
-                    <input type="text" class="form-control" id="especialidad" required>
+                    <select id="especialidad" class="form-select">
+                         <option>Clínica Médica</option>
+                            <option>Pediatría</option>
+                            <option>Cardiología</option>
+                            <option>Ginecología</option>
+                            <option>Traumatología</option>
+                            <option>Dermatología</option>
+                            <option>Otorrinolaringología</option>
+                            <option>Neurología</option>
+                            <option>Oftalmología</option>
+                    </select>
                 </div>
                 <div class="mb-3">
-                    <label for="obraSocial" class="form-label">Obras Sociales (separadas por coma)</label>
-                    <input type="text" class="form-control" id="obraSocial" placeholder="Ej: OSDE, Sempre, Swiss Medical" required>
+                    <label for="matricula" class="form-label">Matrícula</label>
+                    <input type="text" class="form-control" id="matricula">
+                </div>
+                <div class="mb-3">
+                    <label for="fechaAlta" class="form-label">Fecha de alta</label>
+                    <input type="date" class="form-control" id="fechaAlta" >
+                </div>
+                <div class="mb-3">
+                    <label for="obraSocial" class="form-label">Obras Sociales (se puede seleccionar múltiple) Usá ctrl+Click</label>
+                    <select id="obraSocial" class="form-select" multiple size="5">
+                        <option>OSDE</option>
+                        <option>Swiss Medical</option>
+                        <option>Sempre</option>
+                        <option>Jerárquicos Salud</option>
+                        <option>Otro</option>
+                    </select>
                 </div>
                 <div class="mb-3">
                     <label for="telefono" class="form-label">Teléfono</label>
-                    <input type="tel" class="form-control" id="telefono" required>
+                    <input type="tel" class="form-control" id="telefono" >
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" required>
+                    <input type="email" class="form-control" id="email" >
                 </div>
                 <button type="submit" class="btn btn-primary">Dar de alta</button>
             </form>
         </section>     
     </main>
+
+
+<!-- Modal -->
+<div class="modal fade" id="altaMedicoModal" tabindex="-1" aria-labelledby="altaMedicoModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-primary text-white">
+        <h5 class="modal-title" id="altaMedicoModalLabel">Registro exitoso</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Se completa por JS -->
+        <p class="mb-0" id="resumenAlta"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 <!-- footer -->
