@@ -6,17 +6,17 @@ document.addEventListener('DOMContentLoaded', () => {
   const formulario = document.querySelector('.formulario');
   const body = document.body;
 
-  // 🔹 Recuperar el modo guardado en localStorage
+  //Recuperar el modo guardado en localStorage
   let modoOscuro = localStorage.getItem('modoOscuro') === 'true';
 
-  // 🔹 Aplicar el modo al cargar la página
+  //Aplicar el modo al cargar la página
   if (modoOscuro) {
     activarModoOscuro();
   } else {
     activarModoClaro();
   }
 
-  // 🔹 Escuchar el click del botón
+  // Escuchar el click del botón
   boton.addEventListener('click', () => {
     modoOscuro = !modoOscuro;
     if (modoOscuro) {
@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
     localStorage.setItem('modoOscuro', modoOscuro);
   });
 
-  // 🔹 Funciones auxiliares
+  //Funciones auxiliares
   function activarModoOscuro() {
     icono.classList.remove('bi-sun-fill');
     icono.classList.add('bi-moon-fill');
