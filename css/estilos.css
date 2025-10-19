@@ -97,3 +97,32 @@ footer {
 footer p {
     margin: 0; /* Elimina el margen por defecto del párrafo */
 }
+
+
+/* ------ Panel de Control ----- */
+.dash-card {
+  border: 0;
+  border-radius: 1rem;
+  background: #fff;
+  box-shadow: 0 6px 18px rgba(0,0,0,.06);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.dash-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(77, 82, 156, 0.1);
+}
+.card-link {
+  text-decoration: none;
+  color: inherit;
+}
+.dash-icon {
+  width: 56px; height: 56px;
+  border-radius: 14px;
+  display: grid; place-items: center;
+  background: #e7f1ff;
+  font-size: 28px;
+  color: #0d6efd;
+}
+body.bg-dark .dash-card .text-muted {
+  color: #ced4da !important;
+}
