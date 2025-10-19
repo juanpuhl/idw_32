@@ -1,3 +1,4 @@
+
 const formAltaMedicos = document.getElementById('altaMedicoForm');
 const inputNombre = document.getElementById('nombre');
 const inputEspecialidad = document.getElementById('especialidad');
@@ -8,6 +9,8 @@ const inputFechaAlta    = document.getElementById('fechaAlta');
 const inputObraSocial = document.getElementById('obraSocial');
 const inputEmail = document.getElementById('email');
 const inputTelefono = document.getElementById('telefono');
+//constantes de tabla
+const tablaMedicosBody = document.querySelector('#tablaMedicos tbody');
 
 
 //modal agregado por jaoquin
@@ -15,8 +18,91 @@ const modalEl = document.getElementById('altaMedicoModal');
 const modal   = new bootstrap.Modal(modalEl);
 const resumen = document.getElementById('resumenAlta');
 
+//bandera para validacion
+ let flagIndex = null;
+ //funcion para actualizar tabla medicos
+ function ActualizarTablaMedicos() {
+    let medicos = JSON.parse(localStorage.getItem('medicos')) || [];
+    tablaMedicosBody.innerHTML = ''; //limpiar tabla
 
-function altaMedicos(event) {
+    medicos.forEach((medico, index) => {
+      let fila = document.createElement('tr');
+      fila.innerHTML = `
+        <td>${medico.nombre}</td>
+        <td>${medico.especialidad}</td>
+        <td>${medico.matricula}</td>
+        <td>${medico.fechaAlta}</td>
+        <td>${medico.obrasSociales}</td>
+        <td>${medico.telefono}</td>
+        <td>${medico.email}</td>
+        <td><button class="btn btn-sm btn-primary btn-editar" data-index="${index}">Editar</button>
+            <button class="btn btn-sm btn-danger btn-eliminar" data-index="${index}">Eliminar</button>
+        </td>
+      `;
+      tablaMedicosBody.appendChild(fila);
+    });
+  }
+
+  tablaMedicosBody.addEventListener('click', function(event) {
+    if (event.target.classList.contains('btn-editar')) {
+      const index = Number (event.target.dataset.index);
+      editarMedicos(index);
+    }
+    if (event.target.classList.contains('btn-eliminar')) {
+      const index = Number (event.target.dataset.index);
+      eliminarMedicos(index);
+    }
+  });
+
+  //funcion editar medicos
+  function editarMedicos(index) {
+    let medicos = JSON.parse(localStorage.getItem('medicos')) || [];
+    const medico = medicos[index];
+    inputNombre.value = medico.nombre;
+    inputEspecialidad.value = medico.especialidad;
+    inputMatricula.value = medico.matricula;
+    inputFechaAlta.value = medico.fechaAlta;
+    inputObraSocial.value = medico.obrasSociales;
+    inputEmail.value = medico.email;
+    inputTelefono.value = medico.telefono;
+    flagIndex = index; //guardamos el indice para saber que estamos editando
+  }
+
+  //funcion eliminar medicos
+  async function eliminarMedicos(index) {
+  let medicos = JSON.parse(localStorage.getItem('medicos')) || [];
+  const nombre = medicos[index]?.nombre || 'este médico';
+
+  const { isConfirmed } = await Swal.fire({
+    title: '¿Eliminar médico?',
+    html: `Vas a eliminar a <b>${nombre}</b>. Esta acción no se puede deshacer.`,
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Sí, eliminar',
+    cancelButtonText: 'Cancelar',
+    reverseButtons: true,
+    focusCancel: true
+  });
+
+  if (!isConfirmed) return;
+
+  medicos.splice(index, 1);
+  localStorage.setItem('medicos', JSON.stringify(medicos));
+  ActualizarTablaMedicos();   
+  flagIndex = null;
+
+  await Swal.fire({
+    icon: 'success',
+    title: 'Eliminado',
+    text: 'El médico fue eliminado correctamente.',
+    timer: 1500,
+    showConfirmButton: false
+  });
+  }
+
+
+  //funcion alta medicos
+  function altaMedicos(event) {
     event.preventDefault();
 
     let nombre = inputNombre.value.trim();
@@ -53,6 +139,28 @@ function altaMedicos(event) {
     });
     return;
   }
+
+  let medicos = JSON.parse(localStorage.getItem('medicos')) || [];
+  const medico = {
+    nombre,
+    especialidad,
+    obrasSociales,
+    email,
+    telefono,
+    matricula,
+    fechaAlta 
+  }
+  if(flagIndex !== null) {
+    //editar
+    medicos[flagIndex] = medico;
+    flagIndex = null; //reseteamos la bandera
+  } else {
+    //nuevo alta
+    medicos.push(medico);
+  }
+  localStorage.setItem('medicos', JSON.stringify(medicos));
+  ActualizarTablaMedicos();
+
   //RESUMEN en el modal Bootstrap (si todo ok)
   resumen.innerHTML = `
     <strong>Médico registrado:</strong><br>
@@ -66,8 +174,13 @@ function altaMedicos(event) {
   `;
   //mostra el modal
   modal.show();
+  
+
   //resetea el formulario
   formAltaMedicos.reset();
 
+
 }
+
+ActualizarTablaMedicos();
 formAltaMedicos.addEventListener('submit', altaMedicos)
