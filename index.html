@@ -52,53 +52,8 @@
 
         <!-- Sección de cat. medicos -->
      <section class="catalogo">
-            <h2 class="mb-3">Nuestros Profesionales</h2>
-          
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4">
-                <div class="col">
-                    <div class="card h-100 ">
-                        <img src="https://randomuser.me/api/portraits/men/32.jpg" class="card-img-top" alt="Foto Dr. Juan Pérez">
-                        <div class="card-body">
-                            <h3 class="h5 card-title">Dr. Juan Pérez</h3>
-                            <p class="card-text mb-3">Especialista en Cardiología</p>
-                            <a href="#" class="btn btn-primary">Ver más</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="card h-100">
-                        <img src="https://randomuser.me/api/portraits/women/44.jpg" class="card-img-top" alt="Foto Dra. María Gómez">
-                        <div class="card-body">
-                            <h3 class="h5 card-title">Dra. María Gómez</h3>
-                            <p class="card-text mb-3">Especialista en Pediatría</p>
-                            <a href="#" class="btn btn-primary">Ver más</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="card h-100">
-                        <img src="https://randomuser.me/api/portraits/men/54.jpg" class="card-img-top" alt="Foto Dr. Carlos López">
-                        <div class="card-body">
-                            <h3 class="h5 card-title">Dr. Carlos López</h3>
-                            <p class="card-text mb-3">Especialista en Dermatología</p>
-                            <a href="#" class="btn btn-primary">Ver más</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col">
-                    <div class="card h-100">
-                        <img src="https://randomuser.me/api/portraits/women/55.jpg" class="card-img-top" alt="Foto Dra. Ana Martínez">
-                        <div class="card-body">
-                            <h3 class="h5 card-title">Dra. Ana Martínez</h3>
-                            <p class="card-text mb-3">Especialista en Ginecología</p>
-                            <a href="#" class="btn btn-primary">Ver más</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+           <h2 class="mb-3">Nuestros Profesionales</h2>
+  <div id="staffContainer" class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4"></div>
         </section>
 
         <!-- Sección de Obras Sociales -->
@@ -122,6 +77,32 @@
 <script src="js/modooscuro.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="js/menu.js"></script>
+
+<!-- Script para cargar los médicos en el catálogo -->
+ <script>
+  (function renderStaff() {
+    const cont = document.getElementById('staffContainer');
+    if (!cont) return;
+    const medicos = JSON.parse(localStorage.getItem('medicos')) || [];
+
+    // Mostramos hasta 8 cards
+    const slice = medicos.slice(0, 8);
+    cont.innerHTML = slice.map(m => `
+      <div class="col">
+        <div class="card h-100">
+        <!-- aca pongo esto para ver las fotos nomas-->
+          <img src="https://randomuser.me/api/portraits/${Math.random() > 0.5 ? 'men' : 'women'}/${Math.floor(Math.random()*70)+1}.jpg"
+               class="card-img-top" alt="Foto ${m.nombre}">
+          <div class="card-body">
+            <h3 class="h5 card-title">${m.nombre}</h3>
+            <p class="card-text mb-2">${m.especialidad}</p>
+            <small class="text-muted">${m.obrasSociales}</small>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  })();
+</script>
 
 </body>
 </html>
