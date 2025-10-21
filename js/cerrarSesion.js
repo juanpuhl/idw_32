@@ -3,34 +3,33 @@ document.addEventListener("DOMContentLoaded", () => {
   const rol = sessionStorage.getItem("rolUsuario");
   const loginItem = document.querySelector(".nav-item-login");
 
-  //  NUEVO: identificar archivo actual y listas
+  //identificar archivo actual y listas
   let path = window.location.pathname.split("/").pop() || "index.html";
   path = path.toLowerCase();
 
   const PUBLIC_PAGES = new Set(["index.html", "institucional.html", "contacto.html", "login.html"]);
   const ADMIN_PAGES  = new Set(["panelcontrol.html", "altamedicos.html","turnos.html"]);
 
-  //  NUEVO: si no hay usuario y NO es pública → login
+  // si no hay usuario y NO es pública → login
   if (!usuario && !PUBLIC_PAGES.has(path)) {
     window.location.href = "login.html";
     return;
   }
 
-  //  NUEVO: si es admin y NO sos admin → login
+  // si es admin y NO sos admin va al login
   if (ADMIN_PAGES.has(path) && rol !== "admin") {
     window.location.href = "login.html";
     return;
   }
 
 
-  // solo redirige si NO es pública.
+  // solo redirige si NO es publica.
   if (!usuario && !PUBLIC_PAGES.has(path)) {
     window.location.href = "login.html";
     return;
   }
-  // ==========================================================================
 
-  // --- lo demás, tal cual lo tenías ---
+  // --- queda igual que antes
   if (usuario && loginItem) {
     loginItem.innerHTML = `
       <a href="#" id="cerrarSesionBtn" class="nav-link fw-bold text-white">Cerrar sesión</a>
