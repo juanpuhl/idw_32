@@ -7,10 +7,11 @@ document.addEventListener("DOMContentLoaded", () => {
   let path = window.location.pathname.split("/").pop() || "index.html";
   path = path.toLowerCase();
 
+  //si la página no está en la lista pública ni admin, pedirá sesión (ejemplo turnos.html)
   const PUBLIC_PAGES = new Set(["index.html", "institucional.html", "contacto.html", "login.html"]);
-  const ADMIN_PAGES  = new Set(["panelcontrol.html", "altamedicos.html","turnos.html"]);
+  const ADMIN_PAGES  = new Set(["panelcontrol.html", "altamedicos.html"]);
 
-  // si no hay usuario y NO es pública → login
+  // si no hay usuario y NO es pública va a login
   if (!usuario && !PUBLIC_PAGES.has(path)) {
     window.location.href = "login.html";
     return;
@@ -29,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  // --- queda igual que antes
+  //queda igual que antes
   if (usuario && loginItem) {
     loginItem.innerHTML = `
       <a href="#" id="cerrarSesionBtn" class="nav-link fw-bold text-white">Cerrar sesión</a>

@@ -1,4 +1,22 @@
 
+// Semilla(si no hay 'medicos' aún o esta vaciooooo)
+(function seedMedicos() {
+  const MEDICOS_SEED = [
+    { nombre: "Dr. Juan Pérez",   especialidad: "Cardiología",  matricula: "12345", fechaAlta: "2025-09-01", obrasSociales: "OSDE",          telefono: "2954-111111", email: "juan.perez@clinicaidw.com" },
+    { nombre: "Dra. Ana Gómez",   especialidad: "Pediatría",    matricula: "67890", fechaAlta: "2025-09-10", obrasSociales: "Swiss Medical", telefono: "2954-222222", email: "ana.gomez@clinicaidw.com" },
+    { nombre: "Dr. Carlos López", especialidad: "Dermatología", matricula: "11223", fechaAlta: "2025-09-15", obrasSociales: "Sempre",        telefono: "2954-333333", email: "carlos.lopez@clinicaidw.com" },
+  ];
+
+  let current = null;
+  try { current = JSON.parse(localStorage.getItem('medicos')); } catch (_) { current = null; }
+
+  if (!Array.isArray(current) || current.length === 0) {
+    localStorage.setItem('medicos', JSON.stringify(MEDICOS_SEED));
+  }
+})();
+
+//constantes de formulario
+
 const formAltaMedicos = document.getElementById('altaMedicoForm');
 const inputNombre = document.getElementById('nombre');
 const inputEspecialidad = document.getElementById('especialidad');
@@ -35,7 +53,9 @@ const resumen = document.getElementById('resumenAlta');
         <td>${medico.obrasSociales}</td>
         <td>${medico.telefono}</td>
         <td>${medico.email}</td>
-        <td><button class="btn btn-sm btn-primary btn-editar" data-index="${index}">Editar</button>
+        <td>
+            <button class="btn btn-sm btn-secondary btn-ver" data-index="${index}">Ver</button>
+            <button class="btn btn-sm btn-primary btn-editar" data-index="${index}">Editar</button>
             <button class="btn btn-sm btn-danger btn-eliminar" data-index="${index}">Eliminar</button>
         </td>
       `;
@@ -43,16 +63,36 @@ const resumen = document.getElementById('resumenAlta');
     });
   }
 
-  tablaMedicosBody.addEventListener('click', function(event) {
-    if (event.target.classList.contains('btn-editar')) {
-      const index = Number (event.target.dataset.index);
-      editarMedicos(index);
+tablaMedicosBody.addEventListener('click', function(event) {
+  if (event.target.classList.contains('btn-ver')) {
+    const index = Number(event.target.dataset.index);
+    const medicos = JSON.parse(localStorage.getItem('medicos')) || [];
+    const m = medicos[index];
+    if (m) {
+
+      resumen.innerHTML = `
+        <strong>Ficha del médico</strong><br>
+        <b>Nombre:</b> ${m.nombre}<br>
+        <b>Especialidad:</b> ${m.especialidad}<br>
+        <b>Matrícula:</b> ${m.matricula}<br>
+        <b>Fecha de alta:</b> ${m.fechaAlta}<br>
+        <b>Obra social:</b> ${m.obrasSociales}<br>
+        <b>Teléfono:</b> ${m.telefono}<br>
+        <b>Email:</b> ${m.email}
+      `;
+      modal.show();
     }
-    if (event.target.classList.contains('btn-eliminar')) {
-      const index = Number (event.target.dataset.index);
-      eliminarMedicos(index);
-    }
-  });
+  }
+
+  if (event.target.classList.contains('btn-editar')) {
+    const index = Number(event.target.dataset.index);
+    editarMedicos(index);
+  }
+  if (event.target.classList.contains('btn-eliminar')) {
+    const index = Number(event.target.dataset.index);
+    eliminarMedicos(index);
+  }
+});
 
   //funcion editar medicos
   function editarMedicos(index) {
@@ -62,7 +102,11 @@ const resumen = document.getElementById('resumenAlta');
     inputEspecialidad.value = medico.especialidad;
     inputMatricula.value = medico.matricula;
     inputFechaAlta.value = medico.fechaAlta;
-    inputObraSocial.value = medico.obrasSociales;
+    //usamos este para que ande la seleccion multiple
+    Array.from(inputObraSocial.options).forEach(opt => {
+  opt.selected = medico.obrasSociales.split(', ').includes(opt.value);
+});
+    //inputObraSocial.value = medico.obrasSociales;
     inputEmail.value = medico.email;
     inputTelefono.value = medico.telefono;
     flagIndex = index; //guardamos el indice para saber que estamos editando
@@ -161,7 +205,7 @@ const resumen = document.getElementById('resumenAlta');
   localStorage.setItem('medicos', JSON.stringify(medicos));
   ActualizarTablaMedicos();
 
-  //RESUMEN en el modal Bootstrap (si todo ok)
+//RESUMEN en el modal Bootstrap (si todo ok)
   resumen.innerHTML = `
     <strong>Médico registrado:</strong><br>
     <b>Nombre:</b> ${nombre}<br>
