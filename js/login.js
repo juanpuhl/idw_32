@@ -31,13 +31,21 @@ formLogin.addEventListener('submit', function (event) {
         : null;
 
     if (isUsuario) {
+
+        //guardo el rol del usuario para saber que mostrar
+        sessionStorage.setItem("rolUsuario", isUsuario.rol);
+
         sessionStorage.setItem("usuarioLogueado", usuarioInput);
         mostrarMensaje(`Bienvenido, ${usuarioInput}`, "success");
 
-        // Redirige al index después de 2 segundos
+        // Redirige según rol después de 2 segundos
         setTimeout(() => {
-            mensaje.innerHTML = ""; // limpia el mensaje antes de redirigir
-            window.location.href = "index.html";
+            mensaje.innerHTML = ""; 
+            if (isUsuario.rol === "admin") {
+                window.location.href = "panelControl.html"; 
+            } else {
+                window.location.href = "index.html"; 
+            }
         }, 2000);
     } else {
         mostrarMensaje('Error en las credenciales, intenta nuevamente.', "danger");
