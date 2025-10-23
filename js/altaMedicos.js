@@ -53,7 +53,7 @@ const resumen = document.getElementById('resumenAlta');
         <td>${medico.obrasSociales}</td>
         <td>${medico.telefono}</td>
         <td>${medico.email}</td>
-        <td>
+        <td class="d-flex flex-column flex-lg-row gap-1">
             <button class="btn btn-sm btn-secondary btn-ver" data-index="${index}">Ver</button>
             <button class="btn btn-sm btn-primary btn-editar" data-index="${index}">Editar</button>
             <button class="btn btn-sm btn-danger btn-eliminar" data-index="${index}">Eliminar</button>
