@@ -1,7 +1,7 @@
  // formulario del turno 
 const formTurno = document.getElementById("formTurno");
 const listaTurnos = document.getElementById("listaTurnos");
-//  para no poner fechas anteriores 
+//  no se  puede  poner  fechas anteriores 
 document.getElementById("fechaTurno").min = new Date().toISOString().split("T")[0];
 
 formTurno.addEventListener("submit", function (e) {
