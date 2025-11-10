@@ -9,8 +9,6 @@ function mostrarMensaje(texto, tipo = "danger") {
             ${texto}
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>`;
-
-    // Desaparece automáticamente después de 3 segundos
     setTimeout(() => {
         const alert = document.querySelector('.alert');
         if (alert) {
@@ -20,34 +18,44 @@ function mostrarMensaje(texto, tipo = "danger") {
     }, 3000);
 }
 
-formLogin.addEventListener('submit', function (event) {
+formLogin.addEventListener('submit', async function(event) {
     event.preventDefault();
 
     const usuarioInput = usuario.value.trim();
     const claveInput = clave.value.trim();
 
-    const isUsuario = (Array.isArray(usuarios)) ?
-        usuarios.find(u => u.usuario === usuarioInput && u.clave === claveInput)
-        : null;
+    try {
+        const res = await fetch('https://dummyjson.com/auth/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username: usuarioInput, password: claveInput })
+        });
 
-    if (isUsuario) {
+        if (!res.ok) throw new Error('Usuario o contraseña incorrectos');
+        const data = await res.json();
 
-        //guardo el rol del usuario para saber que mostrar
-        sessionStorage.setItem("rolUsuario", isUsuario.rol);
+        // Guardar token y username
+        sessionStorage.setItem("accessToken", data.accessToken);
+        sessionStorage.setItem("usuarioLogueado", data.username);
 
-        sessionStorage.setItem("usuarioLogueado", usuarioInput);
-        mostrarMensaje(`Bienvenido, ${usuarioInput}`, "success");
+        // Obtener datos completos del usuario
+        const userRes = await fetch(`https://dummyjson.com/users/${data.id}`);
+        const userData = await userRes.json();
+        sessionStorage.setItem("usuario", JSON.stringify(userData));
 
-        // Redirige según rol después de 2 segundos
+        const rol = userData.role || 'visita';
+        sessionStorage.setItem("rolUsuario", rol);
+
+        mostrarMensaje(`Bienvenido, ${data.username}`, "success");
+
         setTimeout(() => {
-            mensaje.innerHTML = ""; 
-            if (isUsuario.rol === "admin") {
-                window.location.href = "panelControl.html"; 
-            } else {
-                window.location.href = "index.html"; 
-            }
-        }, 2000);
-    } else {
-        mostrarMensaje('Error en las credenciales, intenta nuevamente.', "danger");
+            mensaje.innerHTML = "";
+            if (rol === 'admin') window.location.href = 'panelControl.html';
+            else window.location.href = 'index.html';
+        }, 1200);
+
+    } catch (error) {
+        console.error("Error en login:", error);
+        mostrarMensaje(error.message, "danger");
     }
 });
