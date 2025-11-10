@@ -1,230 +1,216 @@
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("altaMedicoForm");
+  const tablaMedicos = document.getElementById("tablaMedicos").querySelector("tbody");
+  const listaHorarios = document.getElementById("listaHorarios");
 
-// Semilla(si no hay 'medicos' aún o esta vaciooooo)
-(function seedMedicos() {
-  const MEDICOS_SEED = [
-    { nombre: "Dr. Juan Pérez",   especialidad: "Cardiología",  matricula: "12345", fechaAlta: "2025-09-01", obrasSociales: "OSDE",          telefono: "2954-111111", email: "juan.perez@clinicaidw.com" },
-    { nombre: "Dra. Ana Gómez",   especialidad: "Pediatría",    matricula: "67890", fechaAlta: "2025-09-10", obrasSociales: "Swiss Medical", telefono: "2954-222222", email: "ana.gomez@clinicaidw.com" },
-    { nombre: "Dr. Carlos López", especialidad: "Dermatología", matricula: "11223", fechaAlta: "2025-09-15", obrasSociales: "Sempre",        telefono: "2954-333333", email: "carlos.lopez@clinicaidw.com" },
-  ];
+  const diaSelect = document.getElementById("dia");
+  const horaInicioInput = document.getElementById("horaInicio");
+  const horaFinInput = document.getElementById("horaFin");
+  const btnAgregarHorario = document.getElementById("agregarHorario");
 
-  let current = null;
-  try { current = JSON.parse(localStorage.getItem('medicos')); } catch (_) { current = null; }
+  let horarios = [];
 
-  if (!Array.isArray(current) || current.length === 0) {
-    localStorage.setItem('medicos', JSON.stringify(MEDICOS_SEED));
+  // Actualiza la lista de horarios
+  function actualizarListaHorarios() {
+    listaHorarios.innerHTML = "";
+    horarios.forEach((h, index) => {
+      const li = document.createElement("li");
+      li.className = "list-group-item d-flex justify-content-between align-items-center";
+      li.innerHTML = `
+        <span><strong>${h.dia}:</strong> ${h.rango[0]} - ${h.rango[1]}</span>
+        <button class="btn btn-sm btn-danger">Eliminar</button>
+      `;
+      li.querySelector("button").addEventListener("click", () => {
+        horarios.splice(index, 1);
+        actualizarListaHorarios();
+      });
+      listaHorarios.appendChild(li);
+    });
   }
-})();
 
-//constantes de formulario
+  // Agregar horario
+  btnAgregarHorario.addEventListener("click", () => {
+    const dia = diaSelect.value;
+    const horaInicio = horaInicioInput.value;
+    const horaFin = horaFinInput.value;
 
-const formAltaMedicos = document.getElementById('altaMedicoForm');
-const inputNombre = document.getElementById('nombre');
-const inputEspecialidad = document.getElementById('especialidad');
-//nuevos campos agregads por joaquin
-const inputMatricula    = document.getElementById('matricula');
-const inputFechaAlta    = document.getElementById('fechaAlta');
-//fin campos agregados por joaquin
-const inputObraSocial = document.getElementById('obraSocial');
-const inputEmail = document.getElementById('email');
-const inputTelefono = document.getElementById('telefono');
-//constantes de tabla
-const tablaMedicosBody = document.querySelector('#tablaMedicos tbody');
+    if (!dia || !horaInicio || !horaFin) {
+      Swal.fire({ icon: "warning", title: "Campos incompletos", text: "Debes seleccionar día, hora de inicio y hora de fin." });
+      return;
+    }
 
+    if (horarios.some(h => h.dia === dia)) {
+      Swal.fire({ icon: "warning", title: "Día duplicado", text: "Ya agregaste un horario para ese día." });
+      return;
+    }
 
-//modal agregado por jaoquin
-const modalEl = document.getElementById('altaMedicoModal');
-const modal   = new bootstrap.Modal(modalEl);
-const resumen = document.getElementById('resumenAlta');
+    horarios.push({ dia, rango: [horaInicio, horaFin] });
+    actualizarListaHorarios();
+    horaInicioInput.value = "";
+    horaFinInput.value = "";
+  });
 
-//bandera para validacion
- let flagIndex = null;
- //funcion para actualizar tabla medicos
- function ActualizarTablaMedicos() {
-    let medicos = JSON.parse(localStorage.getItem('medicos')) || [];
-    tablaMedicosBody.innerHTML = ''; //limpiar tabla
+  // Cargar médicos
+  function cargarMedicos() {
+    const medicos = JSON.parse(localStorage.getItem("medicos")) || [];
+    tablaMedicos.innerHTML = "";
 
-    medicos.forEach((medico, index) => {
-      let fila = document.createElement('tr');
-      fila.innerHTML = `
-        <td>${medico.nombre}</td>
-        <td>${medico.especialidad}</td>
-        <td>${medico.matricula}</td>
-        <td>${medico.fechaAlta}</td>
-        <td>${medico.obrasSociales}</td>
-        <td>${medico.telefono}</td>
-        <td>${medico.email}</td>
-        <td class="d-flex flex-column flex-lg-row gap-1">
-            <button class="btn btn-sm btn-secondary btn-ver" data-index="${index}">Ver</button>
-            <button class="btn btn-sm btn-primary btn-editar" data-index="${index}">Editar</button>
-            <button class="btn btn-sm btn-danger btn-eliminar" data-index="${index}">Eliminar</button>
+    medicos.forEach((m, index) => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${m.nombre || "-"}</td>
+        <td>${m.especialidad || "-"}</td>
+        <td>${m.matricula || "-"}</td>
+        <td>${m.fechaAlta || "-"}</td>
+        <td>${m.obrasSociales ? m.obrasSociales.join(", ") : "-"}</td>
+        <td>${m.telefono || "-"}</td>
+        <td>${m.email || "-"}</td>
+        <td>
+          <button class="btn btn-info btn-sm me-1 ver-btn" data-index="${index}"><i class="bi bi-eye"></i></button>
+          <button class="btn btn-warning btn-sm me-1 editar-btn" data-index="${index}"><i class="bi bi-pencil"></i></button>
+          <button class="btn btn-danger btn-sm eliminar-btn" data-index="${index}"><i class="bi bi-trash"></i></button>
         </td>
       `;
-      tablaMedicosBody.appendChild(fila);
+      tablaMedicos.appendChild(tr);
     });
   }
 
-tablaMedicosBody.addEventListener('click', function(event) {
-  if (event.target.classList.contains('btn-ver')) {
-    const index = Number(event.target.dataset.index);
-    const medicos = JSON.parse(localStorage.getItem('medicos')) || [];
-    const m = medicos[index];
-    if (m) {
+  // Delegación de eventos
+  tablaMedicos.addEventListener("click", (e) => {
+    const btn = e.target.closest("button");
+    if (!btn) return;
+    const index = parseInt(btn.dataset.index);
+    if (isNaN(index)) return;
 
-      resumen.innerHTML = `
-        <strong>Ficha del médico</strong><br>
-        <b>Nombre:</b> ${m.nombre}<br>
-        <b>Especialidad:</b> ${m.especialidad}<br>
-        <b>Matrícula:</b> ${m.matricula}<br>
-        <b>Fecha de alta:</b> ${m.fechaAlta}<br>
-        <b>Obra social:</b> ${m.obrasSociales}<br>
-        <b>Teléfono:</b> ${m.telefono}<br>
-        <b>Email:</b> ${m.email}
-      `;
-      modal.show();
-    }
-  }
-
-  if (event.target.classList.contains('btn-editar')) {
-    const index = Number(event.target.dataset.index);
-    editarMedicos(index);
-  }
-  if (event.target.classList.contains('btn-eliminar')) {
-    const index = Number(event.target.dataset.index);
-    eliminarMedicos(index);
-  }
-});
-
-  //funcion editar medicos
-  function editarMedicos(index) {
-    let medicos = JSON.parse(localStorage.getItem('medicos')) || [];
-    const medico = medicos[index];
-    inputNombre.value = medico.nombre;
-    inputEspecialidad.value = medico.especialidad;
-    inputMatricula.value = medico.matricula;
-    inputFechaAlta.value = medico.fechaAlta;
-    //usamos este para que ande la seleccion multiple
-    Array.from(inputObraSocial.options).forEach(opt => {
-  opt.selected = medico.obrasSociales.split(', ').includes(opt.value);
-});
-    //inputObraSocial.value = medico.obrasSociales;
-    inputEmail.value = medico.email;
-    inputTelefono.value = medico.telefono;
-    flagIndex = index; //guardamos el indice para saber que estamos editando
-  }
-
-  //funcion eliminar medicos
-  async function eliminarMedicos(index) {
-  let medicos = JSON.parse(localStorage.getItem('medicos')) || [];
-  const nombre = medicos[index]?.nombre || 'este médico';
-
-  const { isConfirmed } = await Swal.fire({
-    title: '¿Eliminar médico?',
-    html: `Vas a eliminar a <b>${nombre}</b>. Esta acción no se puede deshacer.`,
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonText: 'Sí, eliminar',
-    cancelButtonText: 'Cancelar',
-    reverseButtons: true,
-    focusCancel: true
+    if (btn.classList.contains("ver-btn")) verMedico(index);
+    if (btn.classList.contains("editar-btn")) editarMedico(index);
+    if (btn.classList.contains("eliminar-btn")) confirmarEliminar(index);
   });
 
-  if (!isConfirmed) return;
-
-  medicos.splice(index, 1);
-  localStorage.setItem('medicos', JSON.stringify(medicos));
-  ActualizarTablaMedicos();   
-  flagIndex = null;
-
-  await Swal.fire({
-    icon: 'success',
-    title: 'Eliminado',
-    text: 'El médico fue eliminado correctamente.',
-    timer: 1500,
-    showConfirmButton: false
-  });
-  }
-
-
-  //funcion alta medicos
-  function altaMedicos(event) {
-    event.preventDefault();
-
-    let nombre = inputNombre.value.trim();
-    let especialidad = inputEspecialidad.value.trim();
-    let matricula = inputMatricula.value.trim();
-    let fechaAlta = inputFechaAlta.value;
-    //let obrasSociales = inputObraSocial.value.trim();
-    let obrasSociales = Array.from(inputObraSocial.selectedOptions).map(o => o.value).join(', '); //para la seleccion multiple
-    let email = inputEmail.value.trim();
-    let telefono = inputTelefono.value.trim();
-    
- 
-// validacion con SweetAlert2
-  const faltantes = [];
-  if (!nombre)        faltantes.push('Nombre');
-  if (!especialidad)  faltantes.push('Especialidad');
-  if (!obrasSociales) faltantes.push('Obras Sociales');
-  if (!email)         faltantes.push('Email');
-  if (!telefono)      faltantes.push('Teléfono');
-  if (!matricula)     faltantes.push('Matrícula');
-  if (!fechaAlta)     faltantes.push('Fecha de alta');
-
-  if (faltantes.length) {
+  // Confirmar antes de eliminar
+  function confirmarEliminar(index) {
     Swal.fire({
-      icon: 'warning',
-      title: 'Campos incompletos',
-      html: `
-        <p class="mb-2">Por favor, completá los siguientes campos:</p>
-        <ul class="text-start mb-0">
-          ${faltantes.map(f => `<li>${f}</li>`).join('')}
-        </ul>
-      `,
-      confirmButtonText: 'Entendido'
+      title: "¿Estás seguro?",
+      text: "Esta acción eliminará al médico.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Sí, eliminar",
+      cancelButtonText: "Cancelar"
+    }).then((result) => {
+      if (result.isConfirmed) eliminarMedico(index);
     });
-    return;
   }
 
-  let medicos = JSON.parse(localStorage.getItem('medicos')) || [];
-  const medico = {
-    nombre,
-    especialidad,
-    obrasSociales,
-    email,
-    telefono,
-    matricula,
-    fechaAlta 
+  function eliminarMedico(index) {
+    const medicos = JSON.parse(localStorage.getItem("medicos")) || [];
+    medicos.splice(index, 1);
+    localStorage.setItem("medicos", JSON.stringify(medicos));
+    cargarMedicos();
+    Swal.fire("Eliminado", "El médico fue eliminado correctamente.", "success");
   }
-  if(flagIndex !== null) {
-    //editar
-    medicos[flagIndex] = medico;
-    flagIndex = null; //reseteamos la bandera
-  } else {
-    //nuevo alta
+
+  // Alta de médico
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const nombre = document.getElementById("nombre").value.trim();
+    const especialidad = document.getElementById("especialidad").value.trim();
+    const matricula = document.getElementById("matricula").value.trim();
+    const fechaAlta = document.getElementById("fechaAlta").value;
+    const telefono = document.getElementById("telefono").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const descripcion = document.getElementById("descripcion").value.trim();
+    const valorConsulta = parseFloat(document.getElementById("valorConsulta").value);
+    const obrasSociales = Array.from(document.getElementById("obraSocial").selectedOptions).map(opt => opt.value);
+
+    if (!nombre || !especialidad || !matricula || !fechaAlta || !telefono || !email || !descripcion || isNaN(valorConsulta)) {
+      Swal.fire({ icon: "warning", title: "Campos incompletos", text: "Por favor completá todos los campos obligatorios." });
+      return;
+    }
+
+    const medico = { nombre, especialidad, matricula, fechaAlta, obrasSociales, telefono, email, descripcion, valorConsulta, horarios };
+    const medicos = JSON.parse(localStorage.getItem("medicos")) || [];
     medicos.push(medico);
+    localStorage.setItem("medicos", JSON.stringify(medicos));
+
+    Swal.fire({ icon: "success", title: "Médico dado de alta", showConfirmButton: false, timer: 1500 });
+    form.reset();
+    horarios = [];
+    actualizarListaHorarios();
+    cargarMedicos();
+  });
+
+  // Ver médico
+  function verMedico(index) {
+  const medicos = JSON.parse(localStorage.getItem("medicos")) || [];
+  const m = medicos[index];
+
+  let horariosText = "-";
+  if (Array.isArray(m.horarios) && m.horarios.length > 0) {
+    horariosText = m.horarios.map(h => {
+      if (h.rango && h.rango.length === 2) {
+        return `<u>${h.dia}</u>: ${h.rango[0]} - ${h.rango[1]}`;
+      } else {
+        return `<u>${h.dia}</u>: Horario no definido`;
+      }
+    }).join("<br>");
   }
-  localStorage.setItem('medicos', JSON.stringify(medicos));
-  ActualizarTablaMedicos();
 
-//RESUMEN en el modal Bootstrap (si todo ok)
-  resumen.innerHTML = `
-    <strong>Médico registrado:</strong><br>
-    <b>Nombre:</b> ${nombre}<br>
-    <b>Especialidad:</b> ${especialidad}<br>
-    <b>Obras Sociales:</b> ${obrasSociales}<br>
-    <b>Email:</b> ${email}<br>
-    <b>Teléfono:</b> ${telefono}<br>
-    <b>Matrícula:</b> ${matricula}<br>
-    <b>Fecha de alta:</b> ${fechaAlta}
-  `;
-  //mostra el modal
-  modal.show();
-  
-
-  //resetea el formulario
-  formAltaMedicos.reset();
-
-
+  Swal.fire({
+    title: m.nombre || "-",
+    html: `
+      <p><b>Especialidad:</b> ${m.especialidad || "-"}</p>
+      <p><b>Matrícula:</b> ${m.matricula || "-"}</p>
+      <p><b>Descripción:</b> ${m.descripcion || "-"}</p>
+      <p><b>Valor Consulta:</b> $${m.valorConsulta?.toFixed(2) || "-"}</p>
+      <p><b>Horarios:</b><br>${horariosText}</p>
+      <p><b>Obras Sociales:</b> ${m.obrasSociales?.join(", ") || "-"}</p>
+      <p><b>Teléfono:</b> ${m.telefono || "-"}</p>
+      <p><b>Email:</b> ${m.email || "-"}</p>
+    `,
+    icon: "info",
+    confirmButtonText: "Cerrar"
+  });
 }
 
-ActualizarTablaMedicos();
-formAltaMedicos.addEventListener('submit', altaMedicos)
+
+  // Editar médico
+  function editarMedico(index) {
+    const medicos = JSON.parse(localStorage.getItem("medicos")) || [];
+    const m = medicos[index];
+
+    Swal.fire({
+      title: "Editar Médico",
+      html: `
+        <input id="swal-nombre" class="swal2-input" value="${m.nombre || ""}" placeholder="Nombre">
+        <input id="swal-especialidad" class="swal2-input" value="${m.especialidad || ""}" placeholder="Especialidad">
+        <input id="swal-matricula" class="swal2-input" value="${m.matricula || ""}" placeholder="Matrícula">
+        <input id="swal-telefono" class="swal2-input" value="${m.telefono || ""}" placeholder="Teléfono">
+        <input id="swal-email" class="swal2-input" value="${m.email || ""}" placeholder="Email">
+        <input id="swal-descripcion" class="swal2-input" value="${m.descripcion || ""}" placeholder="Descripción">
+        <input id="swal-valorConsulta" class="swal2-input" type="number" step="0.01" value="${m.valorConsulta || ""}" placeholder="Valor de consulta" style="color: rgba(0,0,0,0.4);">
+      `,
+      showCancelButton: true,
+      confirmButtonText: "Guardar",
+      cancelButtonText: "Cancelar",
+      preConfirm: () => ({
+        nombre: document.getElementById("swal-nombre").value,
+        especialidad: document.getElementById("swal-especialidad").value,
+        matricula: document.getElementById("swal-matricula").value,
+        telefono: document.getElementById("swal-telefono").value,
+        email: document.getElementById("swal-email").value,
+        descripcion: document.getElementById("swal-descripcion").value,
+        valorConsulta: parseFloat(document.getElementById("swal-valorConsulta").value)
+      })
+    }).then(result => {
+      if (result.isConfirmed) {
+        medicos[index] = { ...m, ...result.value };
+        localStorage.setItem("medicos", JSON.stringify(medicos));
+        cargarMedicos();
+        Swal.fire("Actualizado", "Los datos del médico fueron actualizados.", "success");
+      }
+    });
+  }
+
+  // Inicializar
+  cargarMedicos();
+});

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,12 +13,13 @@
 </head>
 
 <!--Navbar-->
+
 <body class="bg-light text-dark">
-       <nav id="navbar navbar-dark"  class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav id="navbar navbar-dark" class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
             <a class="navbar-brand fs-2 fw-bold" href="index.html">
-            <img src="img/Logo-Cruz2.png" alt="Logo Clínica IDW" width="48" height="48" class="me-2">
-            <span class="d-none d-sm-inline">Clínica IDW</span></a>
+                <img src="img/Logo-Cruz2.png" alt="Logo Clínica IDW" width="48" height="48" class="me-2">
+                <span class="d-none d-sm-inline">Clínica IDW</span></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -26,8 +28,9 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link fw-bold" href="index.html">Inicio</a></li>
                     <li class="nav-item"><a class="nav-link fw-bold" href="institucional.html">Institucional</a></li>
-                    <li class="nav-item"><a class="nav-link fw-bold active" href="contacto.html">Contacto</a></li>
-                    <li class="nav-item"><a class="nav-link fw-bold" href="panelControl.html">Administrar</a></li>
+                    <li class="nav-item"><a class="nav-link fw-bold" href="contacto.html">Contacto</a></li>
+                    <li class="nav-item"><a class="nav-link fw-bold active" href="panelControl.html">Administrar</a>
+                    </li>
                     <li class="nav-item nav-item-login"></li>
 
                     <li class="nav-item d-flex align-items-center ms-3">
@@ -40,30 +43,30 @@
             </div>
         </div>
     </nav>
-<!--fin Navbar-->
+    <!--fin Navbar-->
 
 
     <main class="container">
         <section class="mb-5">
             <h2 class="my-3">Alta de Médicos</h2>
             <form id="altaMedicoForm" class="border  rounded p-4 bg-light shadow-sm formulario text-dark">
-                
+
                 <div class="mb-3">
                     <label for="nombre" class="form-label">Nombre</label>
-                    <input type="text" class="form-control" id="nombre" >
+                    <input type="text" class="form-control" id="nombre">
                 </div>
                 <div class="mb-3">
                     <label for="especialidad" class="form-label">Especialidad</label>
                     <select id="especialidad" class="form-select">
-                         <option>Clínica Médica</option>
-                            <option>Pediatría</option>
-                            <option>Cardiología</option>
-                            <option>Ginecología</option>
-                            <option>Traumatología</option>
-                            <option>Dermatología</option>
-                            <option>Otorrinolaringología</option>
-                            <option>Neurología</option>
-                            <option>Oftalmología</option>
+                        <option>Clínica Médica</option>
+                        <option>Pediatría</option>
+                        <option>Cardiología</option>
+                        <option>Ginecología</option>
+                        <option>Traumatología</option>
+                        <option>Dermatología</option>
+                        <option>Otorrinolaringología</option>
+                        <option>Neurología</option>
+                        <option>Oftalmología</option>
                     </select>
                 </div>
                 <div class="mb-3">
@@ -72,10 +75,11 @@
                 </div>
                 <div class="mb-3">
                     <label for="fechaAlta" class="form-label">Fecha de alta</label>
-                    <input type="date" class="form-control" id="fechaAlta" >
+                    <input type="date" class="form-control" id="fechaAlta">
                 </div>
                 <div class="mb-3">
-                    <label for="obraSocial" class="form-label">Obras Sociales (se puede seleccionar múltiple) Usá ctrl+Click</label>
+                    <label for="obraSocial" class="form-label">Obras Sociales (se puede seleccionar múltiple) Usá
+                        ctrl+Click</label>
                     <select id="obraSocial" class="form-select" multiple size="5">
                         <option>OSDE</option>
                         <option>Swiss Medical</option>
@@ -86,76 +90,127 @@
                 </div>
                 <div class="mb-3">
                     <label for="telefono" class="form-label">Teléfono</label>
-                    <input type="tel" class="form-control" id="telefono" >
+                    <input type="tel" class="form-control" id="telefono">
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" >
+                    <input type="email" class="form-control" id="email">
                 </div>
+                <div class="mb-3">
+                    <div class="mb-3">
+                        <label for="descripcion" class="form-label">Descripción</label>
+                        <textarea class="form-control" id="descripcion" rows="2"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label for="valorConsulta" class="form-label">Valor de consulta</label>
+                        <input type="number" class="form-control" id="valorConsulta" step="0.01" min="0">
+                    </div>
+
+                    <label class="form-label">Horarios de atención</label>
+
+                    <div id="horariosContainer" class="border rounded p-3 bg-white">
+                        <p class="text-muted mb-2">Seleccioná los días y horarios disponibles</p>
+
+                        <div class="row g-2">
+                            <div class="col-md-4">
+                                <label for="dia" class="form-label">Día</label>
+                                <select id="dia" class="form-select">
+                                    <option value="Lunes">Lunes</option>
+                                    <option value="Martes">Martes</option>
+                                    <option value="Miércoles">Miércoles</option>
+                                    <option value="Jueves">Jueves</option>
+                                    <option value="Viernes">Viernes</option>
+                                    <option value="Sábado">Sábado</option>
+                                    <option value="Sábado">Domingo</option>
+                                </select>
+                            </div>
+                            <div class="col-md-3">
+                                <label for="horaInicio" class="form-label">Desde</label>
+                                <input type="time" id="horaInicio" class="form-control">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="horaFin" class="form-label">Hasta</label>
+                                <input type="time" id="horaFin" class="form-control">
+                            </div>
+                            <div class="col-md-2 d-flex align-items-end">
+                                <button type="button" id="agregarHorario" class="btn btn-outline-primary w-100">
+                                    <i class="bi bi-plus-lg"></i> Agregar
+                                </button>
+                            </div>
+                        </div>
+
+                        <ul id="listaHorarios" class="list-group mt-3"></ul>
+                    </div>
+                </div>
+
                 <button type="submit" class="btn btn-primary">Dar de alta</button>
             </form>
         </section>
         <!-- Lista de Medicos-->
-         <section>
+        <section>
             <h3 class="mb-3">Lista de Médicos</h3>
             <div class="border rounded p-4 bg-light shadow-sm">
-            <div class="table-responsive">
-                <table class="table table-bordered table-striped align-middle" id="tablaMedicos">
-                    <thead class="table-primary">
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Especialidad</th>
-                            <th>Matrícula</th>
-                            <th>Fecha de alta</th>
-                            <th>Obras Sociales</th>
-                            <th>Teléfono</th>
-                            <th>Email</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Filas de médicos se agregarán aquí dinámicamente -->
-                    </tbody>
-                </table>
+                <div class="table-responsive">
+                    <table class="table table-bordered table-striped align-middle" id="tablaMedicos">
+                        <thead class="table-primary">
+                            <tr>
+                                <th>Nombre</th>
+                                <th>Especialidad</th>
+                                <th>Matrícula</th>
+                                <th>Fecha de alta</th>
+                                <th>Obras Sociales</th>
+                                <th>Teléfono</th>
+                                <th>Email</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Filas de médicos se agregarán aquí dinámicamente -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
-         </section>
+        </section>
 
     </main>
 
 
 
 
-<!-- Modal -->
-<div class="modal fade" id="altaMedicoModal" tabindex="-1" aria-labelledby="altaMedicoModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header bg-primary text-white">
-        <h5 class="modal-title" id="altaMedicoModalLabel">Registro exitoso</h5>
-        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-      </div>
-      <div class="modal-body">
-        <!-- Se completa por JS -->
-        <p class="mb-0" id="resumenAlta"></p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
-      </div>
+    <!-- Modal -->
+    <div class="modal fade" id="altaMedicoModal" tabindex="-1" aria-labelledby="altaMedicoModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="altaMedicoModalLabel">Registro exitoso</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Se completa por JS -->
+                    <p class="mb-0" id="resumenAlta"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Aceptar</button>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
-</div>
 
 
-<!-- footer -->
+    <!-- footer -->
     <footer class="bg-dark text-white text-center py-3 fw-bold">
         <p>&copy; 2025 Clínica IDW. Todos los derechos reservados.</p>
     </footer>
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="js/modooscuro.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
-<script src="js/altaMedicos.js"></script>
-<script src="js/cerrarSesion.js"></script>
-<script src="js/menu.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/modooscuro.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
+    <script src="js/altaMedicos.js"></script>
+    <script src="js/cerrarSesion.js"></script>
+    <script src="js/proteccionAdmin.js"></script>
+    <script src="js/menu.js"></script>
 </body>
+
 </html>

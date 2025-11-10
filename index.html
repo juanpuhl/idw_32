@@ -1,22 +1,26 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clínica IDW - Inicio</title>
+
+    <!-- Estilos -->
     <link rel="stylesheet" href="css/estilos.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <!-- ico-->
     <link rel="icon" href="img/ico/Logo-Cruz2.ico">
 </head>
-<!--Navbar-->
+
 <body class="bg-light text-dark">
-       <nav id="navbar navbar-dark"  class="navbar navbar-expand-lg navbar-dark bg-primary">
+
+    <nav id="navbar navbar-dark" class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
             <a class="navbar-brand fs-2 fw-bold" href="index.html">
-            <img src="img/Logo-Cruz2.png" alt="Logo Clínica IDW" width="48" height="48" class="me-2">
-            <span class="d-none d-sm-inline">Clínica IDW</span></a>
+                <img src="img/Logo-Cruz2.png" alt="Logo Clínica IDW" width="48" height="48" class="me-2">
+                <span class="d-none d-sm-inline">Clínica IDW</span>
+            </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -26,10 +30,10 @@
                     <li class="nav-item"><a class="nav-link fw-bold active" href="index.html">Inicio</a></li>
                     <li class="nav-item"><a class="nav-link fw-bold" href="institucional.html">Institucional</a></li>
                     <li class="nav-item"><a class="nav-link fw-bold" href="contacto.html">Contacto</a></li>
-                    <li class="nav-item"><a class="nav-link fw-bold" href="turno.html">Turno</a></li>
-                    <li class="admin-only" class="nav-item"><a class="nav-link fw-bold" href="panelControl.html">Administrar</a></li>
+                    <li class="nav-item"><a class="nav-link fw-bold" href="turno.html">Turnos</a></li>
+                    <li class="admin-only nav-item"><a class="nav-link fw-bold" href="panelControl.html">Administrar</a>
+                    </li>
                     <li class="nav-item nav-item-login"></li>
-                    
                     <li class="nav-item d-flex align-items-center ms-3">
                         <button id="modoOscuroBtn" class="btn btn-link text-white p-0 d-flex align-items-center">
                             <i id="iconoModo" class="bi bi-sun-fill fs-4"></i>
@@ -40,69 +44,71 @@
             </div>
         </div>
     </nav>
-<!--fin Navbar-->
 
     <main class="container py-4">
         <section class="mb-4">
             <h2>Bienvenidos a la Clínica IWD</h2>
-            <p>En nuestra Clínica ofrecemos un servicio médico de calidad,
-            con profesionales especializados y atención personalizada.
-            </p>
+            <p>En nuestra Clínica ofrecemos un servicio médico de calidad, con profesionales especializados y atención
+                personalizada.</p>
         </section>
 
-        <!-- Sección de cat. medicos -->
-     <section class="catalogo">
-           <h2 class="mb-3">Nuestros Profesionales</h2>
-  <div id="staffContainer" class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4"></div>
-        </section>
-
-        <!-- Sección de Obras Sociales -->
-        <section class="obras-sociales mb-5 mt-4">
-            <h2 class="mb-2">Trabajamos con las siguientes Obras Sociales</h2>
-            <div class="d-flex flex-wrap gap-2 mb-4">
-                <button class="btn btn-outline-primary btn-lg" type="button">Sempre</button>
-                <button class="btn btn-outline-primary btn-lg" type="button">Swiss Medical</button>
-                <button class="btn btn-outline-primary btn-lg" type="button">Jerarquicos Salud</button>
-                <button class="btn btn-outline-primary btn-lg" type="button">OSDE</button>
-            </div>
+        <section class="catalogo">
+            <h2 class="mb-3">Nuestros Profesionales</h2>
+            <div id="staffContainer" class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4"></div>
         </section>
     </main>
 
     <footer class="bg-dark text-white text-center py-3 fw-bold">
-        <p>&copy; 2025 Clínica IDW. Todos los derechos reservados.</p>
+        &copy; 2025 Clínica IDW. Todos los derechos reservados.
     </footer>
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-<script src="js/cerrarSesion.js"></script>
-<script src="js/modooscuro.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="js/menu.js"></script>
 
-<!-- Script para cargar los médicos en el catálogo -->
- <script>
-  (function renderStaff() {
-    const cont = document.getElementById('staffContainer');
-    if (!cont) return;
-    const medicos = JSON.parse(localStorage.getItem('medicos')) || [];
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    // Mostramos hasta 8 cards
-    const slice = medicos.slice(0, 8);
-    cont.innerHTML = slice.map(m => `
-      <div class="col">
-        <div class="card h-100">
-        <!-- aca pongo esto para ver las fotos nomas-->
-          <img src="https://randomuser.me/api/portraits/${Math.random() > 0.5 ? 'men' : 'women'}/${Math.floor(Math.random()*70)+1}.jpg"
-               class="card-img-top" alt="Foto ${m.nombre}">
-          <div class="card-body">
-            <h3 class="h5 card-title">${m.nombre}</h3>
-            <p class="card-text mb-2">${m.especialidad}</p>
-            <small class="text-muted">${m.obrasSociales}</small>
-          </div>
+    <script>
+        (function renderStaff() {
+            const cont = document.getElementById('staffContainer');
+            if (!cont) return;
+
+            const medicos = JSON.parse(localStorage.getItem('medicos')) || [];
+            const slice = medicos.slice(0, 8); // mostrar máximo 8
+
+            cont.innerHTML = slice.map((m, index) => `
+        <div class="col">
+            <div class="card h-100 staff-card" data-index="${index}">
+                <img src="https://randomuser.me/api/portraits/${Math.random() > 0.5 ? 'men' : 'women'}/${Math.floor(Math.random() * 70) + 1}.jpg"
+                    class="card-img-top" alt="Foto ${m.nombre}">
+                <div class="card-body">
+                    <h3 class="h5 card-title">${m.nombre}</h3>
+                    <p class="mb-1"><strong>Matrícula:</strong> ${m.matricula}</p>
+                    <p class="mb-1"><strong>Especialidad:</strong> ${m.especialidad}</p>
+                    <p class="mb-1"><strong>Valor de consulta:</strong> $${m.valorConsulta}</p>
+                    <p class="card-text mb-2">${m.descripcion || 'No hay descripción disponible'}</p>
+                    <small class="text-muted">Acepta: ${m.obrasSociales.join(', ')}</small>
+                    <div class="mt-2">
+                        <button class="btn btn-primary btn-sm sacar-turno-btn">Sacar Turno</button>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     `).join('');
-  })();
-</script>
 
+            // evento de botón sacar turno
+            document.querySelectorAll('.sacar-turno-btn').forEach((btn, idx) => {
+                btn.addEventListener('click', () => {
+                    const doc = slice[idx];
+                    sessionStorage.setItem('doctorSeleccionado', JSON.stringify(doc));
+                    window.location.href = 'turno.html?desde=index';
+                });
+            });
+
+        })();
+    </script>
+
+
+    <script src="js/cerrarSesion.js"></script>
+    <script src="js/modooscuro.js"></script>
+    <script src="js/menu.js"></script>
 </body>
+
 </html>
