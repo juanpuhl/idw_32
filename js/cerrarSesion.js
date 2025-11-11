@@ -3,26 +3,42 @@ document.addEventListener("DOMContentLoaded", () => {
   const rol = sessionStorage.getItem("rolUsuario");
   const loginItem = document.querySelector(".nav-item-login");
 
+  //identificar archivo actual y listas
   let path = window.location.pathname.split("/").pop() || "index.html";
   path = path.toLowerCase();
 
-  const PUBLIC_PAGES = new Set(["index.html", "institucional.html", "contacto.html", "login.html", "turno.html"]);
+  //si la página no está en la lista pública ni admin, pedirá sesión (ejemplo turnos.html)
+  const PUBLIC_PAGES = new Set(["index.html", "institucional.html", "contacto.html", "login.html"]);
   const ADMIN_PAGES  = new Set(["panelcontrol.html", "altamedicos.html"]);
 
+  // si no hay usuario y NO es pública va a login
   if (!usuario && !PUBLIC_PAGES.has(path)) {
     window.location.href = "login.html";
     return;
   }
 
+  // si es admin y NO sos admin va al login
   if (ADMIN_PAGES.has(path) && rol !== "admin") {
     window.location.href = "login.html";
     return;
   }
 
+
+  // solo redirige si NO es publica.
+  if (!usuario && !PUBLIC_PAGES.has(path)) {
+    window.location.href = "login.html";
+    return;
+  }
+
+  //queda igual que antes
   if (usuario && loginItem) {
-    loginItem.innerHTML = `<a href="#" id="cerrarSesionBtn" class="nav-link fw-bold text-white">Cerrar sesión</a>`;
+    loginItem.innerHTML = `
+      <a href="#" id="cerrarSesionBtn" class="nav-link fw-bold text-white">Cerrar sesión</a>
+    `;
   } else if (!usuario && loginItem) {
-    loginItem.innerHTML = `<a class="nav-link fw-bold" href="login.html">Login</a>`;
+    loginItem.innerHTML = `
+      <a class="nav-link fw-bold" href="login.html">Login</a>
+    `;
   }
 
   const cerrarSesionBtn = document.getElementById("cerrarSesionBtn");
@@ -42,7 +58,6 @@ document.addEventListener("DOMContentLoaded", () => {
       if (result.isConfirmed) {
         sessionStorage.removeItem("usuarioLogueado");
         sessionStorage.removeItem("rolUsuario");
-        sessionStorage.removeItem("usuario"); // <- elimina datos de usuario
         await Swal.fire({ title: "Sesión cerrada", icon: "success", timer: 1500, showConfirmButton: false });
         window.location.href = "index.html";
       }
