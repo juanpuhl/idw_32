@@ -1,35 +1,38 @@
+// ============================
+// GESTIÓN DE TURNOS - USUARIO
+// ============================
+
 document.addEventListener("DOMContentLoaded", () => {
+
+  // --- Elementos del DOM ---
+  const form = document.getElementById("formTurno");
   const especialidadSelect = document.getElementById("especialidad");
   const doctorSelect = document.getElementById("doctor");
   const fechaInput = document.getElementById("fechaTurno");
   const fechaHelp = document.getElementById("fechaHelp");
   const horarioSelect = document.getElementById("horarioTurno");
-  const form = document.getElementById("formTurno");
-  const listaTurnosTbody = document.querySelector("#listaTurnos tbody");
-  const listaTurnosSection = document.querySelector("#listaTurnos").closest("section");
 
-  // Obtener médicos desde localStorage
+  // --- Datos ---
   const medicos = JSON.parse(localStorage.getItem("medicos")) || [];
-
-  // Obtener sesión si existe
   const usuarioSesion = JSON.parse(sessionStorage.getItem("usuario"));
   const usernameSesion = sessionStorage.getItem("usuarioLogueado");
-
-  // Obtener doctor seleccionado desde index
   const doctorSeleccionado = JSON.parse(sessionStorage.getItem("doctorSeleccionado"));
 
-  // --- Funciones auxiliares ---
+  // --- Obras sociales ---
+  renderObrasSocialesSelect("obraSocial");
+
+  // ============================
+  // FUNCIONES AUXILIARES
+  // ============================
   function clearDoctorArea() {
     doctorSelect.innerHTML = '<option value="">Seleccione una especialidad primero</option>';
     fechaInput.value = "";
-    fechaInput.min = "";
     fechaHelp.textContent = "";
     horarioSelect.innerHTML = '<option value="">Seleccione un médico</option>';
   }
 
   function capitalizarDia(dia) {
-    if (!dia) return dia;
-    return dia.charAt(0).toUpperCase() + dia.slice(1).toLowerCase();
+    return dia ? dia.charAt(0).toUpperCase() + dia.slice(1).toLowerCase() : dia;
   }
 
   function weekdayNameFromDateStr(dateStr) {
@@ -38,86 +41,80 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function autocompletarUsuario() {
-    if (usuarioSesion) {
-      document.getElementById("nombreApellido").value = `${usuarioSesion.firstName} ${usuarioSesion.lastName}`;
-      document.getElementById("DNI").value = usuarioSesion.id;
-      document.getElementById("email").value = usuarioSesion.email;
-      document.getElementById("telefono").value = usuarioSesion.phone;
-    }
+    if (!usuarioSesion) return;
+    document.getElementById("nombreApellido").value = `${usuarioSesion.firstName} ${usuarioSesion.lastName}`;
+    document.getElementById("DNI").value = usuarioSesion.id;
+    document.getElementById("email").value = usuarioSesion.email;
+    document.getElementById("telefono").value = usuarioSesion.phone;
   }
 
   function autocompletarDoctor(doc) {
     if (!doc) return;
-
     especialidadSelect.value = doc.especialidad || "";
-    
-    // Poblar select de doctor
     doctorSelect.innerHTML = `<option value="${doc.nombre}" selected>${doc.nombre} — Matrícula ${doc.matricula}</option>`;
-    
-    // Mostrar días disponibles
     if (doc.horarios) {
       const diasAtencion = doc.horarios.map(h => capitalizarDia(h.dia));
-      fechaHelp.textContent = `Este médico atiende: ${diasAtencion.join(", ")}. Seleccioná una fecha que caiga en esos días.`;
+      fechaHelp.textContent = `Este médico atiende: ${diasAtencion.join(", ")}.`;
     }
-
-    sessionStorage.removeItem("doctorSeleccionado"); // limpiar después de autocompletar
+    sessionStorage.removeItem("doctorSeleccionado");
   }
 
-  function esDesdeIndex() {
-    const params = new URLSearchParams(window.location.search);
-    return params.get("desde") === "index";
-  }
-
-  // --- Inicializar ---
+  // ============================
+  // INICIALIZACIÓN
+  // ============================
   clearDoctorArea();
   autocompletarUsuario();
 
-  // Autocompletar doctor solo si venís desde index
-  if (doctorSeleccionado && esDesdeIndex()) {
-    autocompletarDoctor(doctorSeleccionado);
-  }
+  if (doctorSeleccionado) autocompletarDoctor(doctorSeleccionado);
 
-  // --- Al cambiar especialidad: poblar médicos ---
+  // ============================
+  // CAMBIO DE ESPECIALIDAD - CARGA MÉDICOS
+  // ============================
   especialidadSelect.addEventListener("change", () => {
     clearDoctorArea();
     const esp = especialidadSelect.value;
-    doctorSelect.innerHTML = "<option value=''>Seleccionar médico</option>";
-
     if (!esp) return;
 
     const filtrados = medicos.filter(m => (m.especialidad || "").toLowerCase() === esp.toLowerCase());
-    filtrados.forEach(m => {
-      const opt = document.createElement("option");
-      opt.value = m.nombre;
-      opt.textContent = `${m.nombre} — Matrícula ${m.matricula}`;
-      doctorSelect.appendChild(opt);
-    });
-
     if (filtrados.length === 0) {
-      doctorSelect.innerHTML = "<option value=''>No hay médicos para esta especialidad</option>";
+      doctorSelect.innerHTML = "<option>No hay médicos para esta especialidad</option>";
+      return;
     }
+
+    doctorSelect.innerHTML = filtrados.map(m =>
+      `<option value="${m.nombre}">${m.nombre} — Matrícula ${m.matricula}</option>`
+    ).join('');
   });
 
-  // --- Al cambiar doctor: mostrar días disponibles ---
+  // ============================
+  // CAMBIO DE MÉDICO - MOSTRAR DÍAS DISPONIBLES
+  // ============================
   doctorSelect.addEventListener("change", () => {
     fechaInput.value = "";
-    fechaHelp.textContent = "";
-    horarioSelect.innerHTML = '<option value="">Seleccione un médico</option>';
-
+    horarioSelect.innerHTML = '<option value="">Seleccione un horario</option>';
     const nombreDoc = doctorSelect.value;
     if (!nombreDoc) return;
 
     const doctor = medicos.find(m => m.nombre === nombreDoc);
     if (!doctor) return;
 
-    const diasAtencion = doctor.horarios.map(h => capitalizarDia(h.dia));
-    fechaHelp.textContent = `Este médico atiende: ${diasAtencion.join(", ")}. Seleccioná una fecha que caiga en esos días.`;
+    if (!doctor.horarios || doctor.horarios.length === 0) {
+      doctor.horarios = [
+        { dia: "Lunes", horas: ["08:00 - 12:00"] },
+        { dia: "Martes", horas: ["08:00 - 12:00"] },
+        { dia: "Miércoles", horas: ["08:00 - 12:00"] },
+        { dia: "Jueves", horas: ["08:00 - 12:00"] },
+        { dia: "Viernes", horas: ["08:00 - 12:00"] }
+      ];
+    }
 
-    const hoy = new Date();
-    fechaInput.min = `${hoy.getFullYear()}-${String(hoy.getMonth() + 1).padStart(2, "0")}-${String(hoy.getDate()).padStart(2, "0")}`;
+    const diasAtencion = doctor.horarios.map(h => capitalizarDia(h.dia));
+    fechaHelp.textContent = `Atiende: ${diasAtencion.join(", ")}. Seleccioná una fecha válida.`;
   });
 
-  // --- Al cambiar fecha: mostrar horarios disponibles ---
+  // ============================
+  // CAMBIO DE FECHA- MOSTRAR HORARIOS DISPONIBLES
+  // ============================
   fechaInput.addEventListener("change", () => {
     horarioSelect.innerHTML = '<option value="">Seleccionar horario</option>';
     const fecha = fechaInput.value;
@@ -125,7 +122,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const nombreDoc = doctorSelect.value;
     const doctor = medicos.find(m => m.nombre === nombreDoc);
-    if (!doctor || !Array.isArray(doctor.horarios)) return;
+    if (Array.isArray(doctor.horarios)) {
+  doctor.horarios = doctor.horarios.map(h => {
+    if (h.horas && Array.isArray(h.horas)) return h;
+    if (h.horaInicio && h.horaFin) {
+      return { ...h, horas: [`${h.horaInicio} - ${h.horaFin}`] };
+    }
+    return h;
+  });
+}
+    if (!doctor) return;
 
     const diaSeleccionado = weekdayNameFromDateStr(fecha).toLowerCase();
     const bloque = doctor.horarios.find(h => h.dia.toLowerCase() === diaSeleccionado);
@@ -133,7 +139,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!bloque) {
       Swal.fire({
         icon: "warning",
-        title: "Fecha no disponible",
+        title: "Día no disponible",
         text: `El médico no atiende ese día. Días disponibles: ${doctor.horarios.map(h => capitalizarDia(h.dia)).join(", ")}.`
       });
       fechaInput.value = "";
@@ -144,97 +150,59 @@ document.addEventListener("DOMContentLoaded", () => {
       const [inicio, fin] = rango.split(" - ");
       let [hora, min] = inicio.split(":").map(Number);
       const [horaFin, minFin] = fin.split(":").map(Number);
-
       while (hora < horaFin || (hora === horaFin && min < minFin)) {
         const horaStr = `${String(hora).padStart(2, "0")}:${String(min).padStart(2, "0")}`;
-        const opt = document.createElement("option");
-        opt.value = horaStr;
-        opt.textContent = horaStr;
-        horarioSelect.appendChild(opt);
-
+        horarioSelect.insertAdjacentHTML("beforeend", `<option value="${horaStr}">${horaStr}</option>`);
         min += 30;
-        if (min >= 60) {
-          min -= 60;
-          hora += 1;
-        }
+        if (min >= 60) { min -= 60; hora += 1; }
       }
     });
   });
 
-  // --- Guardar turno ---
-  form.addEventListener("submit", e => {
+  // ============================
+  // GUARDAR TURNO
+  // ============================
+  form.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    const nombreApellido = document.getElementById("nombreApellido").value.trim();
-    const especialidad = especialidadSelect.value;
-    const medico = doctorSelect.value;
-    const fecha = fechaInput.value;
-    const horario = horarioSelect.value;
-    const dni = document.getElementById("DNI").value.trim();
-    const obrasSociales = document.getElementById("obraSocial").value;
-    const email = document.getElementById("email").value.trim();
-    const telefono = document.getElementById("telefono").value.trim();
+    const turno = {
+      username: usuarioSesion ? usernameSesion : "invitado",
+      nombreApellido: document.getElementById("nombreApellido").value.trim(),
+      especialidad: especialidadSelect.value,
+      medico: doctorSelect.value,
+      fecha: fechaInput.value,
+      horario: horarioSelect.value,
+      dni: document.getElementById("DNI").value.trim(),
+      obrasSociales: document.getElementById("obraSocial").value,
+      email: document.getElementById("email").value.trim(),
+      telefono: document.getElementById("telefono").value.trim(),
+  valorConsulta: (() => {
+    const medicos = JSON.parse(localStorage.getItem("medicos")) || [];
+    const encontrado = medicos.find(m => m.nombre === doctorSelect.value);
+    return encontrado ? Number(encontrado.valorConsulta) || 0 : 0;
+     })()
+    };
 
-    if (!nombreApellido || !especialidad || !medico || !fecha || !horario || !dni || !email || !telefono) {
+    if (Object.values(turno).some(v => !v)) {
       Swal.fire({ icon: "warning", title: "Faltan datos", text: "Completá todos los campos." });
       return;
     }
-
-    const turno = {
-      username: usuarioSesion ? usernameSesion : null,
-      nombreApellido,
-      especialidad,
-      medico,
-      fecha,
-      horario,
-      dni,
-      obrasSociales,
-      email,
-      telefono
-    };
 
     const turnos = JSON.parse(localStorage.getItem("turnos")) || [];
     turnos.push(turno);
     localStorage.setItem("turnos", JSON.stringify(turnos));
 
-    Swal.fire({ icon: "success", title: "Turno solicitado", text: "El turno se guardó correctamente.", timer: 1400, showConfirmButton: false });
+    Swal.fire({
+      icon: "success",
+      title: "Turno solicitado",
+      text: "El turno fue registrado correctamente.",
+      timer: 1800,
+      showConfirmButton: false
+    });
 
     form.reset();
     clearDoctorArea();
     autocompletarUsuario();
-    cargarTablaTurnos();
   });
 
-  // --- Mostrar tabla de turnos solo para usuario logueado ---
-  function cargarTablaTurnos() {
-    if (!usuarioSesion) {
-      listaTurnosSection.style.display = "none";
-      return;
-    }
-
-    listaTurnosSection.style.display = "block";
-
-    listaTurnosTbody.innerHTML = "";
-    const turnos = JSON.parse(localStorage.getItem("turnos")) || [];
-    const turnosUsuario = turnos.filter(t => t.username === usernameSesion);
-
-    turnosUsuario.forEach(t => {
-      const tr = document.createElement("tr");
-      tr.innerHTML = `
-        <td>${t.nombreApellido}</td>
-        <td>${t.especialidad}</td>
-        <td>${t.medico}</td>
-        <td>${t.dni}</td>
-        <td>${t.horario}</td>
-        <td>${t.fecha}</td>
-        <td>${t.obrasSociales}</td>
-        <td>${t.email}</td>
-        <td>${t.telefono}</td>
-      `;
-      listaTurnosTbody.appendChild(tr);
-    });
-  }
-
-  // Inicializar tabla de turnos
-  cargarTablaTurnos();
 });

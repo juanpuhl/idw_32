@@ -1,51 +1,31 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const usuario = sessionStorage.getItem("usuarioLogueado");
-  const rol = sessionStorage.getItem("rolUsuario");
-  const loginItem = document.querySelector(".nav-item-login");
+// ============================
+// FUNCIÓN GLOBAL DE CIERRE DE SESIÓN
+// ============================
+function cerrarSesion() {
+  Swal.fire({
+    title: 'Cerrar sesión',
+    text: '¿Deseás cerrar tu sesión actual?',
+    icon: 'question',
+    showCancelButton: true,
+    confirmButtonText: 'Sí, cerrar',
+    cancelButtonText: 'Cancelar',
+    reverseButtons: true
+  }).then((result) => {
+    if (result.isConfirmed) {
+      sessionStorage.clear();
+      localStorage.removeItem('accessToken');
+      localStorage.removeItem('usuario');
+      localStorage.removeItem('usuarioLogueado');
+      localStorage.removeItem('rolUsuario');
 
-  let path = window.location.pathname.split("/").pop() || "index.html";
-  path = path.toLowerCase();
-
-  const PUBLIC_PAGES = new Set(["index.html", "institucional.html", "contacto.html", "login.html", "turno.html"]);
-  const ADMIN_PAGES  = new Set(["panelcontrol.html", "altamedicos.html"]);
-
-  if (!usuario && !PUBLIC_PAGES.has(path)) {
-    window.location.href = "login.html";
-    return;
-  }
-
-  if (ADMIN_PAGES.has(path) && rol !== "admin") {
-    window.location.href = "login.html";
-    return;
-  }
-
-  if (usuario && loginItem) {
-    loginItem.innerHTML = `<a href="#" id="cerrarSesionBtn" class="nav-link fw-bold text-white">Cerrar sesión</a>`;
-  } else if (!usuario && loginItem) {
-    loginItem.innerHTML = `<a class="nav-link fw-bold" href="login.html">Login</a>`;
-  }
-
-  const cerrarSesionBtn = document.getElementById("cerrarSesionBtn");
-  if (cerrarSesionBtn) {
-    cerrarSesionBtn.addEventListener("click", async (e) => {
-      e.preventDefault();
-      const result = await Swal.fire({
-        title: "¿Cerrar sesión?",
-        text: "Se cerrará tu sesión actual.",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Sí, cerrar sesión",
-        cancelButtonText: "Cancelar"
+      Swal.fire({
+        icon: 'success',
+        title: 'Sesión cerrada',
+        timer: 1500,
+        showConfirmButton: false
+      }).then(() => {
+        window.location.href = 'login.html';
       });
-      if (result.isConfirmed) {
-        sessionStorage.removeItem("usuarioLogueado");
-        sessionStorage.removeItem("rolUsuario");
-        sessionStorage.removeItem("usuario"); // <- elimina datos de usuario
-        await Swal.fire({ title: "Sesión cerrada", icon: "success", timer: 1500, showConfirmButton: false });
-        window.location.href = "index.html";
-      }
-    });
-  }
-});
+    }
+  });
+}
