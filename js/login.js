@@ -1,3 +1,6 @@
+// ============================
+// LOGIN DE USUARIO
+// ============================
 const formLogin = document.getElementById('formLogin');
 const usuario = document.getElementById('usuario');
 const clave = document.getElementById('clave');
@@ -34,20 +37,27 @@ formLogin.addEventListener('submit', async function(event) {
         if (!res.ok) throw new Error('Usuario o contraseña incorrectos');
         const data = await res.json();
 
-        // Guardar token y username
+        // Guardar token y username (en ambas storages)
         sessionStorage.setItem("accessToken", data.accessToken);
         sessionStorage.setItem("usuarioLogueado", data.username);
+        localStorage.setItem("accessToken", data.accessToken);
+        localStorage.setItem("usuarioLogueado", data.username);
 
         // Obtener datos completos del usuario
         const userRes = await fetch(`https://dummyjson.com/users/${data.id}`);
         const userData = await userRes.json();
+
+        // Guardar en ambas storages para mantener persistencia
         sessionStorage.setItem("usuario", JSON.stringify(userData));
+        localStorage.setItem("usuario", JSON.stringify(userData));
 
         const rol = userData.role || 'visita';
         sessionStorage.setItem("rolUsuario", rol);
+        localStorage.setItem("rolUsuario", rol);
 
-        mostrarMensaje(`Bienvenido, ${data.username}`, "success");
+        mostrarMensaje(`Bienvenido, ${userData.firstName} ${userData.lastName}`, "success");
 
+        // Redirección según rol
         setTimeout(() => {
             mensaje.innerHTML = "";
             if (rol === 'admin') window.location.href = 'panelControl.html';
