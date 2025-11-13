@@ -43,9 +43,7 @@
               <a class="nav-link fw-bold" href="index.html">Inicio</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link fw-bold" href="institucional.html"
-                >Institucional</a
-              >
+              <a class="nav-link fw-bold" href="institucional.html">Institucional</a>
             </li>
             <li class="nav-item">
               <a class="nav-link fw-bold" href="contacto.html">Contacto</a>
@@ -54,9 +52,7 @@
               <a class="nav-link fw-bold active" href="turno.html">Turnos</a>
             </li>
             <li class="admin-only nav-item">
-              <a class="nav-link fw-bold" href="panelControl.html"
-                >Administrar</a
-              >
+              <a class="nav-link fw-bold" href="panelControl.html">Administrar</a>
             </li>
             <li class="nav-item nav-item-login"></li>
             <li class="nav-item d-flex align-items-center ms-3">
@@ -65,11 +61,9 @@
                 class="btn btn-link text-white p-0 d-flex align-items-center"
               >
                 <i id="iconoModo" class="bi bi-sun-fill fs-4"></i>
-                <span
-                  class="d-inline d-lg-none ms-2 text-white fw-bold"
-                  id="textoModo"
-                  >Modo oscuro</span
-                >
+                <span class="d-inline d-lg-none ms-2 text-white fw-bold" id="textoModo">
+                  Modo oscuro
+                </span>
               </button>
             </li>
           </ul>
@@ -83,23 +77,19 @@
 
         <form
           id="formTurno"
-          class="border rounded p-4 shadow-sm bg-white text-dark formulario"
+          class="border rounded p-4 shadow-sm bg-light text-dark formulario"
         >
           <div class="mb-3">
-            <label for="nombreApellido" class="form-label"
-              >Nombre y Apellido</label
-            >
-            <input
-              type="text"
-              class="form-control"
-              id="nombreApellido"
-              required
-            />
+            <label for="nombreApellido" class="form-label">Nombre y Apellido</label>
+            <input type="text" class="form-control" id="nombreApellido" required />
           </div>
-          <!-- Especialidades -->
-          <select id="especialidad" class="form-select" required>
-            <option value="">Seleccionar especialidad</option>
-          </select>
+
+          <div class="mb-3">
+            <label for="especialidad" class="form-label">Especialidad</label>
+            <select id="especialidad" class="form-select" required>
+              <option value="">Seleccionar especialidad</option>
+            </select>
+          </div>
 
           <div class="mb-3">
             <label for="doctor" class="form-label">Médico</label>
@@ -115,9 +105,7 @@
           </div>
 
           <div class="mb-3">
-            <label for="horarioTurno" class="form-label"
-              >Horario del Turno</label
-            >
+            <label for="horarioTurno" class="form-label">Horario del Turno</label>
             <select id="horarioTurno" class="form-select" required>
               <option value="">Seleccione un médico</option>
             </select>
@@ -143,9 +131,7 @@
             <input type="tel" class="form-control" id="telefono" required />
           </div>
 
-          <button type="submit" class="btn btn-primary w-100">
-            Solicitar Turno
-          </button>
+          <button type="submit" class="btn btn-primary w-100">Solicitar Turno</button>
         </form>
       </section>
     </main>
@@ -153,7 +139,8 @@
     <footer class="bg-dark text-white text-center py-3 fw-bold mt-auto">
       <p>&copy; 2025 Clínica IDW. Todos los derechos reservados.</p>
     </footer>
-    <!--Especialidades JS -->
+
+    <!-- JS -->
     <script src="js/especialidades.js"></script>
     <script>
       document.addEventListener("DOMContentLoaded", () => {

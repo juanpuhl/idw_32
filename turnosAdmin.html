@@ -21,12 +21,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <div class="container">
         <a class="navbar-brand fw-bold fs-3" href="index.html">
-          <img
-            src="img/Logo-Cruz2.png"
-            width="48"
-            height="48"
-            class="me-2"
-          />Clínica IDW
+          <img src="img/Logo-Cruz2.png" width="48" height="48" class="me-2" />Clínica IDW
         </a>
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto">
@@ -37,15 +32,20 @@
               <a class="nav-link fw-bold" href="panelControl.html">Panel</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link fw-bold active" href="turnosAdmin.html"
-                >Turnos</a
-              >
+              <a class="nav-link fw-bold active" href="turnosAdmin.html">Turnos</a>
             </li>
             <li class="nav-item nav-item-login"></li>
-              <button id="modoOscuroBtn" class="btn btn-link text-white p-0 d-flex align-items-center">
-                <i id="iconoModo" class="bi bi-sun-fill fs-4"></i>
-                <span class="d-inline d-lg-none ms-2 text-white fw-bold" id="textoModo">Modo oscuro</span>
-              </button>
+            <button
+              id="modoOscuroBtn"
+              class="btn btn-link text-white p-0 d-flex align-items-center"
+            >
+              <i id="iconoModo" class="bi bi-sun-fill fs-4"></i>
+              <span
+                class="d-inline d-lg-none ms-2 text-white fw-bold"
+                id="textoModo"
+                >Modo oscuro</span
+              >
+            </button>
           </ul>
         </div>
       </div>
@@ -85,7 +85,7 @@
       </div>
     </main>
 
-    <!-- Modal para nuevo turno -->
+    <!-- Modal -->
     <div
       class="modal fade"
       id="modalNuevoTurno"
@@ -109,12 +109,7 @@
               <div class="row g-3">
                 <div class="col-md-6">
                   <label class="form-label">Nombre y Apellido</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="nombreApellido"
-                    required
-                  />
+                  <input type="text" class="form-control" id="nombreApellido" required />
                 </div>
                 <div class="col-md-6">
                   <label class="form-label">DNI</label>
@@ -122,11 +117,7 @@
                 </div>
                 <div class="col-md-6">
                   <label class="form-label">Especialidad</label>
-                  <select
-                    id="especialidad"
-                    class="form-select"
-                    required
-                  ></select>
+                  <select id="especialidad" class="form-select" required></select>
                 </div>
                 <div class="col-md-6">
                   <label class="form-label">Médico</label>
@@ -138,12 +129,7 @@
                 </div>
                 <div class="col-md-6">
                   <label class="form-label">Horario</label>
-                  <input
-                    type="time"
-                    class="form-control"
-                    id="horario"
-                    required
-                  />
+                  <input type="time" class="form-control" id="horario" required />
                 </div>
                 <div class="col-md-6">
                   <label class="form-label">Obra Social</label>
@@ -159,9 +145,7 @@
                 </div>
               </div>
               <div class="text-end mt-4">
-                <button type="submit" class="btn btn-success">
-                  Guardar Turno
-                </button>
+                <button type="submit" class="btn btn-success">Guardar Turno</button>
               </div>
             </form>
           </div>
@@ -180,6 +164,6 @@
     <script src="js/menu.js"></script>
     <script src="js/cerrarSesion.js"></script>
     <script src="js/turnosAdmin.js"></script>
-        <script src="js/modooscuro.js"></script>
+    <script src="js/modooscuro.js"></script>
   </body>
 </html>
