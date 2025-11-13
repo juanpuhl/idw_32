@@ -84,74 +84,86 @@
       </div>
     </nav>
 
-    <main class="container py-5">
-      <h2 class="mb-4 text-center">¿Quiénes Somos?</h2>
-      <p class="mb-4">
-        Somos una clínica que nació con un propósito muy claro: cuidar de la
-        salud de las personas con respeto, compromiso y calidez. Creemos que
-        cada paciente es único, por eso nuestra atención va más allá de lo
-        médico; buscamos escuchar, acompañar y estar presentes en cada momento
-        del proceso. Nuestro equipo está formado por profesionales con gran
-        experiencia, pero sobre todo con una profunda vocación de servicio. Nos
-        esforzamos cada día por brindar un trato humano, cercano y de confianza,
-        porque sabemos que la salud no solo se trata de diagnósticos y
-        tratamientos, sino también de sentirse cuidado y comprendido. Queremos
-        que quienes nos eligen encuentren en nuestra clínica un espacio seguro,
-        donde puedan atender sus necesidades médicas con tranquilidad, pero
-        también sentirse contenidos y apoyados. Nuestra misión es acompañar a
-        cada persona en el camino hacia su bienestar, ofreciendo atención de
-        calidad, pero sobre todo un vínculo humano que marque la diferencia.
-      </p>
+  <main class="container py-5 section-institucional">
+  <h2 class="text-center mb-5 fw-bold">Institucional</h2>
 
-      <div class="row mb-4">
-        <div class="col-md-4">
-          <h3>Misión</h3>
-          <p>
-            Nuestra misión es acercar la salud a todas las personas mediante
-            servicios médicos confiables, accesibles y de calidad, priorizando
-            el bienestar integral de cada paciente.
-          </p>
-        </div>
-        <div class="col-md-4">
-          <h3>Visión</h3>
-          <p>
-            Queremos consolidarnos como la clínica de referencia en la región,
-            destacándonos por la innovación en nuestros servicios, el
-            profesionalismo de nuestro equipo y la confianza que generamos en la
-            comunidad.
-          </p>
-        </div>
-        <div class="col-md-4">
-          <h3>Valores</h3>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item">
-              <strong>Compromiso:</strong> asumimos la responsabilidad de cuidar
-              la salud y el bienestar de nuestros pacientes.
-            </li>
-            <li class="list-group-item">
-              <strong>Calidad:</strong> buscamos la excelencia en cada servicio
-              apoyándonos en la experiencia profesional y la tecnología médica.
-            </li>
-            <li class="list-group-item">
-              <strong>Respeto:</strong> valoramos a cada persona, brindando un
-              trato humano, cercano y digno.
-            </li>
-            <li class="list-group-item">
-              <strong>Confianza:</strong> construimos vínculos sólidos basados
-              en la transparencia y la calidez.
-            </li>
-            <li class="list-group-item">
-              <strong>Vocación:</strong> trabajamos con pasión y dedicación para
-              acompañar a quienes confían en nosotros.
-            </li>
-          </ul>
-        </div>
-      </div>
-    </main>
+  <div class="card p-4">
+    <h5><i class="bi bi-heart-fill text-danger me-2"></i>¿Quiénes Somos?</h5>
+    <p>
+      Somos una clínica comprometida con cuidar la salud de las personas con
+      respeto, calidez y compromiso. Creemos que cada paciente es único, por
+      eso brindamos una atención que va más allá de lo médico: escuchamos,
+      acompañamos y generamos confianza. Nuestro equipo combina experiencia
+      profesional con vocación de servicio, ofreciendo un trato humano y
+      cercano. Queremos que quienes nos eligen encuentren un espacio seguro,
+      donde la calidad médica se una al acompañamiento y al vínculo humano
+      que hace la diferencia.
+    </p>
+  </div>
+
+  <div class="card p-4">
+    <h5><i class="bi bi-bullseye text-primary me-2"></i>Misión</h5>
+    <p>
+      Nuestra misión es acercar la salud a todas las personas mediante
+      servicios médicos confiables, accesibles y de calidad, priorizando el
+      bienestar integral de cada paciente.
+    </p>
+  </div>
+
+  <div class="card p-4">
+    <h5><i class="bi bi-eye-fill text-primary me-2"></i>Visión</h5>
+    <p>
+      Queremos consolidarnos como la clínica de referencia en la región,
+      destacándonos por la innovación en nuestros servicios, el
+      profesionalismo de nuestro equipo y la confianza que generamos en la
+      comunidad.
+    </p>
+  </div>
+
+  <div class="card p-4">
+    <h5><i class="bi bi-star-fill text-warning me-2"></i>Valores</h5>
+    <ul>
+      <li>
+        <strong>Compromiso</strong>: asumimos la responsabilidad de cuidar la
+        salud y el bienestar de nuestros pacientes.
+      </li>
+      <li>
+        <strong>Respeto</strong>: valoramos a cada persona, brindando un trato
+        humano, cercano y digno.
+      </li>
+      <li>
+        <strong>Calidad</strong>: buscamos la excelencia en cada servicio,
+        apoyándonos en la experiencia profesional y la tecnología médica.
+      </li>
+      <li>
+        <strong>Confianza</strong>: construimos vínculos sólidos basados en la
+        transparencia y la calidez.
+      </li>
+      <li>
+        <strong>Vocación</strong>: trabajamos con pasión y dedicación para
+        acompañar a quienes confían en nosotros.
+      </li>
+    </ul>
+  </div>
+</main>
+
 
     <footer class="bg-dark text-white text-center py-3 fw-bold">
       &copy; 2025 Clínica IDW. Todos los derechos reservados.
     </footer>
+<!-- script -->
+ <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const cards = document.querySelectorAll(".section-institucional .card");
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add("show");
+    });
+  }, { threshold: 0.2 });
+  cards.forEach(c => observer.observe(c));
+});
+</script>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/cerrarSesion.js"></script>
