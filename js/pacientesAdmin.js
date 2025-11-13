@@ -22,7 +22,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         edad: u.age,
         email: u.email,
         telefono: u.phone,
-        usuario: u.username
+        usuario: u.username,
+        password: "1234", // valor genérico para los importados
+        role: "usuario"
       }));
       localStorage.setItem('pacientes', JSON.stringify(pacientes));
     } catch (err) {
@@ -69,13 +71,16 @@ document.addEventListener('DOMContentLoaded', async () => {
   formPaciente.addEventListener('submit', (e) => {
     e.preventDefault();
     const index = document.getElementById('pacienteIndex').value;
+
     const paciente = {
       nombre: document.getElementById('nombre').value.trim(),
       apellido: document.getElementById('apellido').value.trim(),
       edad: parseInt(document.getElementById('edad').value),
       email: document.getElementById('email').value.trim(),
       telefono: document.getElementById('telefono').value.trim(),
-      usuario: document.getElementById('usuario').value.trim()
+      usuario: document.getElementById('usuarioInput').value.trim(),
+      password: document.getElementById('passwordInput').value.trim(),
+      role: "usuario"
     };
 
     if (index === '') {
@@ -85,6 +90,31 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     localStorage.setItem('pacientes', JSON.stringify(pacientes));
+
+    // ============================
+    // Sincronizar también con "users" (para login local)
+    // ============================
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+    const userIndex = users.findIndex(u => u.username === paciente.usuario);
+
+    const userCompatible = {
+      id: Date.now(),
+      firstName: paciente.nombre,
+      lastName: paciente.apellido,
+      age: paciente.edad,
+      email: paciente.email,
+      phone: paciente.telefono,
+      username: paciente.usuario,
+      password: paciente.password,
+      role: "usuario"
+    };
+
+    if (userIndex >= 0) users[userIndex] = userCompatible;
+    else users.push(userCompatible);
+
+    localStorage.setItem('users', JSON.stringify(users));
+    // ============================
+
     renderTabla();
     modalPaciente.hide();
 
@@ -110,7 +140,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       document.getElementById('edad').value = p.edad;
       document.getElementById('email').value = p.email;
       document.getElementById('telefono').value = p.telefono;
-      document.getElementById('usuario').value = p.usuario;
+      document.getElementById('usuarioInput').value = p.usuario;
+      document.getElementById('passwordInput').value = p.password || '';
       document.getElementById('modalPacienteLabel').textContent = 'Editar Paciente';
       modalPaciente.show();
     }
@@ -134,6 +165,15 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (res.isConfirmed) {
         pacientes.splice(i, 1);
         localStorage.setItem('pacientes', JSON.stringify(pacientes));
+
+        // Quitar también de "users" si existe
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+        const indexUser = users.findIndex(u => u.username === p.usuario);
+        if (indexUser >= 0) {
+          users.splice(indexUser, 1);
+          localStorage.setItem('users', JSON.stringify(users));
+        }
+
         renderTabla();
         Swal.fire({
           icon: 'success',

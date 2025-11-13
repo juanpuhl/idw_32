@@ -9,22 +9,29 @@ function inicializarObrasSociales() {
       nombre: "Sempre",
       descripcion: "Obra Social de la Provincia de La Pampa.",
       logo: "img/obras/sempre.png",
-      activa: true
+      activa: true,
     },
     {
       id: 2,
       nombre: "Jerárquicos Salud",
       descripcion: "Obra social de Empleados Jerárquicos del Banco Nación.",
       logo: "img/obras/jerarquicos.png",
-      activa: true
+      activa: true,
     },
     {
       id: 3,
       nombre: "Swiss Medical",
       descripcion: "Medicina prepaga, seguros y ART.",
       logo: "img/obras/swiss.png",
-      activa: true
-    }
+      activa: true,
+    },
+    {
+      id: 4,
+      nombre: "Federara Salud",
+      descripcion: "Nos une tu bienestar.",
+      logo: "img/obras/federara.png",
+      activa: true,
+    },
   ];
 
   let actuales = JSON.parse(localStorage.getItem("obrasSociales")) || [];
@@ -36,8 +43,10 @@ function inicializarObrasSociales() {
   }
 
   // Agregar faltantes (no sobrescribe los editados)
-  SEED.forEach(base => {
-    const existe = actuales.some(o => o.nombre.toLowerCase() === base.nombre.toLowerCase());
+  SEED.forEach((base) => {
+    const existe = actuales.some(
+      (o) => o.nombre.toLowerCase() === base.nombre.toLowerCase()
+    );
     if (!existe) {
       actuales.push(base);
     }
@@ -58,11 +67,11 @@ function getObrasSociales() {
 }
 
 function renderObrasSocialesSelect(selectElementId) {
-  const obras = getObrasSociales().filter(o => o.activa);
+  const obras = getObrasSociales().filter((o) => o.activa);
   const select = document.getElementById(selectElementId);
   if (!select) return;
   select.innerHTML = "";
-  obras.forEach(o => {
+  obras.forEach((o) => {
     const opt = document.createElement("option");
     opt.value = o.nombre;
     opt.textContent = o.nombre;
