@@ -1,153 +1,201 @@
 <!DOCTYPE html>
 <html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clínica IDW - Inicio</title>
+    <link rel="stylesheet" href="css/estilos.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+    <link rel="icon" href="img/ico/Logo-Cruz2.ico" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Clínica IDW - Inicio</title>
-  <link rel="stylesheet" href="css/estilos.css" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
-  <link rel="icon" href="img/ico/Logo-Cruz2.ico" />
-</head>
-
-<!--Navbar-->
-
-<body class="bg-light text-dark">
-  <nav id="navbar navbar-dark" class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class="container">
-      <a class="navbar-brand fs-2 fw-bold" href="index.html">
-        <img src="img/Logo-Cruz2.png" alt="Logo Clínica IDW" width="48" height="48" class="me-2" />
-        <span class="d-none d-sm-inline">Clínica IDW</span>
-      </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link fw-bold active" href="index.html">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link fw-bold" href="institucional.html">Institucional</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link fw-bold" href="contacto.html">Contacto</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link fw-bold" href="turno.html">Turno</a>
-          </li>
-          <li class="admin-only" class="nav-item">
-            <a class="nav-link fw-bold" href="panelControl.html">Administrar</a>
-          </li>
-          <li class="nav-item nav-item-login"></li>
-          <li class="nav-item d-flex align-items-center ms-3">
-            <button id="modoOscuroBtn" class="btn btn-link text-white p-0 d-flex align-items-center">
-              <i id="iconoModo" class="bi bi-sun-fill fs-4"></i>
-              <span class="d-inline d-lg-none ms-2 text-white fw-bold" id="textoModo">Modo oscuro</span>
-            </button>
-          </li>
-        </ul>
+  <!--Navbar-->
+  <body class="bg-light text-dark">
+    <nav
+      id="navbar navbar-dark"
+      class="navbar navbar-expand-lg navbar-dark bg-primary"
+    >
+      <div class="container">
+        <a class="navbar-brand fs-2 fw-bold" href="index.html">
+          <img
+            src="img/Logo-Cruz2.png"
+            alt="Logo Clínica IDW"
+            width="48"
+            height="48"
+            class="me-2"
+          />
+          <span class="d-none d-sm-inline">Clínica IDW</span>
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link fw-bold active" href="index.html">Inicio</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link fw-bold" href="institucional.html"
+                >Institucional</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link fw-bold" href="contacto.html">Contacto</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link fw-bold" href="turno.html">Turno</a>
+            </li>
+            <li class="admin-only" class="nav-item">
+              <a class="nav-link fw-bold" href="panelControl.html"
+                >Administrar</a
+              >
+            </li>
+            <li class="nav-item nav-item-login"></li>
+            <li class="nav-item d-flex align-items-center ms-3">
+              <button
+                id="modoOscuroBtn"
+                class="btn btn-link text-white p-0 d-flex align-items-center"
+              >
+                <i id="iconoModo" class="bi bi-sun-fill fs-4"></i>
+                <span
+                  class="d-inline d-lg-none ms-2 text-white fw-bold"
+                  id="textoModo"
+                  >Modo oscuro</span
+                >
+              </button>
+            </li>
+          </ul>
+        </div>
       </div>
-    </div>
-  </nav>
-  <!--fin Navbar-->
+    </nav>
+    <!--fin Navbar-->
 
-  <main class="container py-4">
-    <section class="mb-4">
-      <h2>Bienvenidos a la Clínica IDW</h2>
-      <p>
-        En nuestra Clínica ofrecemos un servicio médico de calidad, con
-        profesionales especializados y atención personalizada.
-      </p>
-    </section>
+    <main class="container py-4">
+      <section class="mb-4">
+        <h2>Bienvenidos a la Clínica IDW</h2>
+        <p>
+          En nuestra Clínica ofrecemos un servicio médico de calidad, con
+          profesionales especializados y atención personalizada.
+        </p>
+      </section>
 
-    <!-- Sección de catálogo de médicos -->
-    <section class="catalogo">
-      <h2 class="mb-3">Nuestros Profesionales</h2>
-      <div id="staffContainer" class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4"></div>
-    </section>
+      <!-- Sección de catálogo de médicos -->
+      <section class="catalogo">
+        <h2 class="mb-3">Nuestros Profesionales</h2>
+        <div
+          id="staffContainer"
+          class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4"
+        ></div>
+      </section>
 
-    <!-- Sección de Obras Sociales -->
-    <section id="obras-sociales" class="obras-sociales mb-5 mt-4">
-      <h2 class="mb-2">Trabajamos con las siguientes Obras Sociales</h2>
-      <div id="listaObras" class="row g-4"></div>
-    </section>
-  </main>
+      <!-- Sección de Obras Sociales -->
+      <section id="obras-sociales" class="obras-sociales mb-5 mt-4">
+        <h2 class="mb-2">Trabajamos con las siguientes Obras Sociales</h2>
+        <div id="listaObras" class="row g-4"></div>
+      </section>
+    </main>
 
-  <!-- ============================
+    <!-- ============================
      FOOTER INFORMATIVO - CLÍNICA IDW
 ============================ -->
-  <section class="bg-light border-top py-5 mt-5">
-    <div class="container">
-      <div class="row text-center text-md-start">
+    <section class="border-top py-5 mt-5 bg-body-secondary text-body">
+      <div class="container">
+        <div class="row text-center text-md-start">
+          <!-- HORARIO DE ATENCIÓN -->
+          <div class="col-md-4 mb-4">
+            <h5 class="fw-bold text-primary mb-3">HORARIO DE ATENCIÓN</h5>
+            <p class="mb-2">
+              Lunes a viernes de <strong>8:30 hs a 20:30 hs</strong>
+            </p>
+            <p class="small mb-0">
+              Fuera de ese horario puede dejar su mensaje y será respondido a la
+              brevedad.
+            </p>
+          </div>
 
-        <!-- HORARIO DE ATENCIÓN -->
-        <div class="col-md-4 mb-4">
-          <h5 class="fw-bold text-primary mb-3">HORARIO DE ATENCIÓN</h5>
-          <p class="mb-2">Lunes a viernes de <strong>8:30 hs a 20:30 hs</strong></p>
-          <p class="text-muted small mb-0">Fuera de ese horario puede dejar su mensaje y será respondido a la brevedad.
-          </p>
-        </div>
+          <!-- CONTACTO -->
+          <div class="col-md-4 mb-4">
+            <h5 class="fw-bold text-primary mb-3">CONTACTO</h5>
+            <p class="mb-1">
+              <i class="bi bi-geo-alt-fill me-2 text-primary"></i>
+              <strong>Dirección:</strong> Sarmiento 234, Concordia
+            </p>
+            <p class="mb-1">
+              <i class="bi bi-telephone-fill me-2 text-primary"></i>
+              (0343) 456-7890
+            </p>
+            <p class="mb-1">
+              <i class="bi bi-envelope-fill me-2 text-primary"></i>
+              contacto.idwsa@gmail.com
+            </p>
+            <p class="mb-0">
+              <i class="bi bi-geo me-2 text-primary"></i>
+              Entre Ríos, Argentina
+            </p>
+          </div>
 
-        <!-- CONTACTO -->
-        <div class="col-md-4 mb-4">
-          <h5 class="fw-bold text-primary mb-3">CONTACTO</h5>
-          <p class="mb-1">
-            <i class="bi bi-geo-alt-fill me-2 text-primary"></i>
-            <strong>Dirección:</strong> Sarmiento 234, Concordia
-          </p>
-          <p class="mb-1">
-            <i class="bi bi-telephone-fill me-2 text-primary"></i>
-            (0343) 456-7890
-          </p>
-          <p class="mb-1">
-            <i class="bi bi-envelope-fill me-2 text-primary"></i>
-            contacto.idwsa@gmail.com
-          </p>
-          <p class="mb-0">
-            <i class="bi bi-geo me-2 text-primary"></i>
-            Entre Ríos, Argentina
-          </p>
-        </div>
-
-        <!-- UBICACIÓN Y REDES -->
-        <div class="col-md-4 mb-4">
-          <h5 class="fw-bold text-primary mb-3">NUESTRA UBICACIÓN</h5>
-          <p class="mb-2"><strong>Provincia:</strong> Entre Ríos</p>
-          <p class="mb-3"><strong>Localidad:</strong> Concordia</p>
-          <div class="d-flex justify-content-center justify-content-md-start">
-            <a href="#" class="btn btn-outline-primary btn-sm me-2" title="Facebook">
-              <i class="bi bi-facebook fs-5"></i>
-            </a>
-            <a href="#" class="btn btn-outline-danger btn-sm me-2" title="Instagram">
-              <i class="bi bi-instagram fs-5"></i>
-            </a>
-            <a href="#" class="btn btn-outline-info btn-sm" title="WhatsApp">
-              <i class="bi bi-whatsapp fs-5"></i>
-            </a>
+          <!-- UBICACIÓN Y REDES -->
+          <div class="col-md-4 mb-4">
+            <h5 class="fw-bold text-primary mb-3">NUESTRA UBICACIÓN</h5>
+            <p class="mb-2"><strong>Provincia:</strong> Entre Ríos</p>
+            <p class="mb-3"><strong>Localidad:</strong> Concordia</p>
+            <div class="d-flex justify-content-center justify-content-md-start">
+              <a
+                href="#"
+                class="btn btn-outline-primary btn-sm me-2"
+                title="Facebook"
+              >
+                <i class="bi bi-facebook fs-5"></i>
+              </a>
+              <a
+                href="#"
+                class="btn btn-outline-danger btn-sm me-2"
+                title="Instagram"
+              >
+                <i class="bi bi-instagram fs-5"></i>
+              </a>
+              <a
+                href="#"
+                class="btn btn-outline-success btn-sm"
+                title="WhatsApp"
+              >
+                <i class="bi bi-whatsapp fs-5"></i>
+              </a>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Footer final-->
-  <footer class="bg-dark text-white text-center py-3 fw-bold">
-    <p>&copy; 2025 Clínica IDW. Todos los derechos reservados.</p>
-  </footer>
+    <!-- Footer final-->
+    <footer class="bg-dark text-white text-center py-3 fw-bold">
+      <p>&copy; 2025 Clínica IDW. Todos los derechos reservados.</p>
+    </footer>
 
-  <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <script src="js/cerrarSesion.js"></script>
-  <script src="js/modooscuro.js"></script>
-  <script src="js/menu.js"></script>
-  <script src="js/authSession.js"></script>
-  <script src="js/seedMedicos.js"></script>
-  <script src="js/obrasSociales.js"></script>
-  <script src="js/index.js"></script>
-</body>
-
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/cerrarSesion.js"></script>
+    <script src="js/modooscuro.js"></script>
+    <script src="js/menu.js"></script>
+    <script src="js/authSession.js"></script>
+    <script src="js/seedMedicos.js"></script>
+    <script src="js/obrasSociales.js"></script>
+    <script src="js/index.js"></script>
+  </body>
 </html>
